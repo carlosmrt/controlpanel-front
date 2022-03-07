@@ -20,9 +20,10 @@ export default {
     }
   },
   methods: {
-    getDashboard() {
+    getDashboards() {
       DashboardRetrieve.retrieve().then((response) => {
           this.dashboards = response.data;
+          this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
         },
         (err) => {
           this.$notification.error("Error Inesperado", {timer: 3});
@@ -30,7 +31,7 @@ export default {
     }
   },
   mounted() {
-    this.getDashboard()
+    this.getDashboards()
   }
 }
 </script>
