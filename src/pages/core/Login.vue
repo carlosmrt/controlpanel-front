@@ -3,8 +3,7 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4 lg4>
-            <v-card class="elevation-15 pa-3 border-card">
+            <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
               <v-card-text>
                 <div class="layout column align-center" style="margin: 10%">
                   <img src="static/crypto_suite_logo.png">
@@ -36,7 +35,6 @@
                 <v-btn block class="btnlogin" color="#8A4086" @click="login" :loading="loading">Acceder</v-btn>
               </v-card-actions>
             </v-card>
-          </v-flex>
         </v-layout>
       </v-container>
       <v-snackbar

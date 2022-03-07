@@ -10,6 +10,7 @@ import Vuetify from 'vuetify';
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import './styles/global.css';
+import './index.css';
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'

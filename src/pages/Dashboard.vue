@@ -1,11 +1,12 @@
 <template>
   <v-container fluid grid-list-x1>
     <v-tabs>
-      <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index"> {{item.name}}</v-tab>
+      <v-tab class="tabClass" @click="tab = item.id" v-for="(item, index) in dashboards" :key="index"> {{item.name}}</v-tab>
     </v-tabs>
-    <v-layout v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
-        <CryptoIframe class="cryptoiframe" id="" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
+    <v-layout flex items-center justify-center v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
+      <CryptoIframe class="cryptoiframe" id="" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
     </v-layout>
+
   </v-container>
 </template>
 <script>
@@ -39,5 +40,8 @@ export default {
 <style>
   .cryptoiframe{
     margin: 2%;
+  }
+  .tabClass{
+    border-left: #0d47a1 1px;
   }
 </style>
