@@ -8,7 +8,7 @@
       <v-card-text>
         <v-form class="px-3">
           <v-text-field label="Coin" v-model="coin"></v-text-field>
-          <v-btn class="mx-0 mt-3" @click="submit">Add coin</v-btn>
+          <v-btn class="mx-0 mt-3" @click="submit()">Add coin</v-btn>
         </v-form>
       </v-card-text>
    </v-card>
@@ -29,7 +29,6 @@ export default {
   methods:{
     submit(){
       AddCoinToDashboard.addCoin(this.dashboardId, this.coin);
-      console.log(this.coin, this.dashboardId);
     }
   }
 }

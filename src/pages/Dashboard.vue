@@ -3,11 +3,12 @@
     <v-tabs>
       <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
     </v-tabs>
-    <v-container><AddCryptoModal :dashboardId='tab'></AddCryptoModal></v-container>
-    <v-layout flex items-center justify-center v-show="tab === dashboard.id && dashboard.coins.length > 0" row wrap v-for="(dashboard, index) in dashboards" :key="index">
+    <v-container max-width="500px"><div style="float: right"><AddCryptoModal :dashboardId='tab'></AddCryptoModal></div></v-container>
+    <v-container flex items-center justify-center>
+    <v-layout v-show="tab === dashboard.id && dashboard.coins.length > 0" row wrap v-for="(dashboard, index) in dashboards" :key="index">
       <CryptoIframe class="cryptoIframe" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
     </v-layout>
-
+    </v-container>
   </v-container>
 </template>
 <script>
