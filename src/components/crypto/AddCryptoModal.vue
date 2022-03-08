@@ -28,7 +28,9 @@ export default {
   },
   methods:{
     submit(){
-      AddCoinToDashboard.addCoin(this.dashboardId, this.coin);
+      AddCoinToDashboard.addCoin(this.dashboardId, this.coin).then(() => {
+        this.$emit("coinAdded");
+      })
     }
   }
 }

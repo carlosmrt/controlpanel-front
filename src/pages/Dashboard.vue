@@ -3,7 +3,7 @@
     <v-tabs>
       <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
     </v-tabs>
-    <v-container max-width="500px"><div style="float: right"><AddCryptoModal :dashboardId='tab'></AddCryptoModal></div></v-container>
+    <v-container max-width="500px"><div style="float: right"><AddCryptoModal :dashboardId='tab' @coinAdded="getDashboards"></AddCryptoModal></div></v-container>
     <v-container flex items-center justify-center>
     <v-layout v-show="tab === dashboard.id && dashboard.coins.length > 0" row wrap v-for="(dashboard, index) in dashboards" :key="index">
       <CryptoIframe class="cryptoIframe" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
@@ -28,7 +28,9 @@ export default {
     getDashboards() {
       DashboardRetrieve.retrieve().then((response) => {
           this.dashboards = response.data;
-          this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
+          if(this.tab === null){
+            this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
+          }
         },
         (err) => {
           this.$notification.error("Error Inesperado", {timer: 3});
