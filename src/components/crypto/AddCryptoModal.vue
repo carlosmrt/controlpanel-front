@@ -3,18 +3,21 @@
    <v-btn slot="activator" fab dark color="indigo"><v-icon dark>mdi-plus</v-icon></v-btn>
    <v-card>
      <v-card-title>
-       <h2>Add new coin to dashboard</h2>
+       <h2>Añadir Crypto</h2>
      </v-card-title>
       <v-card-text>
         <v-form class="px-3">
-          <v-select
+          <v-autocomplete
             :items="coins"
             v-model="selectedCoin"
             :item-text="'name'"
             :item-value="'id'"
+            clearable
             label="Select a coin"
           />
-          <v-btn class="mx-0 mt-3" @click="submit(), dialog = false">Add coin</v-btn>
+          <div class="float">
+            <v-btn class="mx-0 mt-3" @click="submit(), dialog = false">Añadir</v-btn>
+          </div>
         </v-form>
       </v-card-text>
    </v-card>

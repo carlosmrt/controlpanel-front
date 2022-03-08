@@ -5,8 +5,10 @@
     </v-tabs>
     <v-container max-width="500px"><div style="float: right"><AddCryptoModal :dashboardId='tab' @coinAdded="getDashboards"></AddCryptoModal></div></v-container>
     <v-container flex items-center justify-center>
-    <v-layout v-show="tab === dashboard.id && dashboard.coins.length > 0" row wrap v-for="(dashboard, index) in dashboards" :key="index">
+
+    <v-layout v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
       <CryptoIframe class="cryptoIframe" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
+      <div v-if="!dashboard.coins.length">No item in inventory</div>
     </v-layout>
     </v-container>
   </v-container>
