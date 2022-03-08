@@ -8,7 +8,7 @@
 
     <v-layout v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
       <CryptoIframe class="cryptoIframe" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
-      <div v-if="!dashboard.coins.length">No item in inventory</div>
+      <div v-if="!dashboard.coins.length"><img width="70%" src="static/empty_dashboard.png" alt="''"/></div>
     </v-layout>
     </v-container>
   </v-container>

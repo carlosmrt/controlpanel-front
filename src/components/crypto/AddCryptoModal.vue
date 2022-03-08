@@ -35,7 +35,7 @@ export default {
     return {
       selectedCoin: null,
       coins: null,
-      dialog:true,
+      dialog:false,
     }
   },
   methods: {
