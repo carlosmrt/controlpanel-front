@@ -1,9 +1,9 @@
 <template>
- <v-dialog v-model="dialog" max-width="500px">
-   <v-btn slot="activator" fab dark color="indigo"><v-icon dark>mdi-plus</v-icon></v-btn>
+ <v-dialog v-model="coinDialog" max-width="500px">
+   <v-btn slot="activator" fab dark color="purple"><v-icon dark>mdi-plus</v-icon></v-btn>
    <v-card>
      <v-card-title>
-       <h2>Añadir Crypto</h2>
+       <h2>Add Crypto</h2>
      </v-card-title>
       <v-card-text>
         <v-form class="px-3">
@@ -13,10 +13,10 @@
             :item-text="'name'"
             :item-value="'id'"
             clearable
-            label="Select a coin"
+            label="Select Crypto"
           />
           <div class="float">
-            <v-btn class="mx-0 mt-3" @click="submit(), dialog = false">Añadir</v-btn>
+            <v-btn class="mx-0 mt-3" color="purple" dark @click="submit(), coinDialog = false">Add</v-btn>
           </div>
         </v-form>
       </v-card-text>
@@ -35,7 +35,7 @@ export default {
     return {
       selectedCoin: null,
       coins: null,
-      dialog:false,
+      coinDialog: false,
     }
   },
   methods: {

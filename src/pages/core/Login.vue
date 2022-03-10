@@ -21,7 +21,7 @@
                     :type="hidePassword ? 'password' : 'text'"
                     :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
                     name="password"
-                    label="Contraseña"
+                    label="Password"
                     id="password"
                     :rules="[rules.required]"
                     v-model="password"
@@ -30,9 +30,9 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <a>¿No tienes una cuenta? Regístrate</a>
+                <a>Need a CryptoBoard account? Sign up</a>
                 <v-spacer></v-spacer>
-                <v-btn block class="btnlogin" color="#8A4086" @click="login" :loading="loading">Acceder</v-btn>
+                <v-btn block class="btnlogin" color="purple" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
             </v-card>
         </v-layout>
@@ -82,7 +82,7 @@ export default {
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token',res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Bienvenido de nuevo!", {timer: 3});
+        this.$notification.dark("Welcome back!", {timer: 3});
       } catch (error) {
         vm.error = true;
         vm.result = "Email or Password is incorrect.";
