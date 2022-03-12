@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Dashboard from '../pages/Dashboard.vue';
+import Dashboard from '../pages/crypto/Dashboard.vue';
 import Login from '../pages/core/Login.vue';
 import Error from '../pages/core/Error.vue';
+import Register from "../pages/core/Register";
 
 
 
@@ -33,6 +34,14 @@ export default new Router({
       path: '/error',
       name: 'Error',
       component: Error,
+      meta: {
+        allowAnonymous: true
+      }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
       meta: {
         allowAnonymous: true
       }

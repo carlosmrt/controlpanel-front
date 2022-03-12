@@ -30,9 +30,9 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <a>Need a CryptoBoard account? Sign up</a>
+                <a @click="register">Need a CryptoBoard account? Sign up</a>
                 <v-spacer></v-spacer>
-                <v-btn block class="btnlogin" color="purple" @click="login" :loading="loading">Login</v-btn>
+                <v-btn block class="btnLogin" color="purple" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
             </v-card>
         </v-layout>
@@ -88,6 +88,9 @@ export default {
         vm.result = "Email or Password is incorrect.";
         vm.showResult = true;
       }
+    },
+    register(){
+      this.$router.push("/register")
     }
   }
 }
@@ -113,7 +116,7 @@ export default {
     background-color: #F0F0F0;
   }
 
-  .btnlogin{
+  .btnLogin{
     color: #F0F0F0;
     font-weight: bold;
     border-radius: 20px;

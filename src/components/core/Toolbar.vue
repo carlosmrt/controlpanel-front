@@ -61,7 +61,7 @@ export default {
       user: null,
       loadingResources: false,
       items: [
-        /*{
+        {
           icon: 'account_circle',
           href: '#',
           title: 'Profile',
@@ -77,11 +77,11 @@ export default {
 
             vm.dialogSettings = true;
           }
-        },*/
+        },
         {
           icon: 'power_settings_new',
           href: '#',
-          title: 'Desconectar',
+          title: 'Logout',
           click: () => {
             const vm = this;
             sessionStorage.setItem('token','')

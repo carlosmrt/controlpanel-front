@@ -18,10 +18,10 @@
   </v-container>
 </template>
 <script>
-import CryptoIframe from "../components/crypto/CryptoIframe";
-import DashboardRetrieve from "../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
-import AddCryptoModal from "../components/crypto/AddCryptoModal";
-import AddDashboardModal from "../components/crypto/AddDashboardModal";
+import CryptoIframe from "../../components/crypto/CryptoIframe";
+import DashboardRetrieve from "../../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
+import AddCryptoModal from "../../components/crypto/AddCryptoModal";
+import AddDashboardModal from "../../components/crypto/AddDashboardModal";
 
 export default {
   components: {AddDashboardModal, AddCryptoModal, CryptoIframe},
