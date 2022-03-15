@@ -4,7 +4,7 @@ const CORE_CONTEXT_PATH = "/private/core/v1";
 const CRYPTO_CONTEXT_PATH = "/private/crypto/v1";
 
 const axiosAPI = axios.create({
-  baseURL : "http://localhost:8000"
+  baseURL : "http://localhost:8029"
 });
 
 const apiRequest = (method, url, request) => {
