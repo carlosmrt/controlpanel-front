@@ -4,7 +4,7 @@
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
     <v-spacer></v-spacer>
-    <v-container style="width: 60%;margin-left: 20%;">
+    <v-container class="mb-5" style="width: 60%;margin-left: 20%;">
       <v-avatar color="#F8F5F5" size="100px">
         <a style="color: #8A4086;font-size: 24px;">{{getInitials()}}</a>
       </v-avatar>
@@ -60,7 +60,7 @@
           :error="error"
           @click:append="hideConfirmNewPassword = !hideConfirmNewPassword"/>
       </v-form>
-      <v-btn style="width:20%; border-radius: 20px;" block center class="btnLogin" color="#c700ff" @click="updateUser" dark :loading="loading">Save</v-btn>
+      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="#c700ff" @click="updateUser" dark :loading="loading">Save</v-btn>
     </v-container>
 
   </v-container>
