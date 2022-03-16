@@ -8,7 +8,7 @@
         <img src="static/logo.png" width="36px"></img>
       </router-link>
       <router-link :to="{ name: 'Dashboard' }" class="text">
-         YourSuite
+         CryptoBoard
       </router-link>
     </v-toolbar>
     <v-list>
