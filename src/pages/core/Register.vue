@@ -6,7 +6,7 @@
           <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
             <v-card-text>
               <div class="layout column align-center" style="margin: 10%">
-                <img src="static/crypto_suite_logo.png">
+                <img src="static/logo_small.png">
               </div>
               <v-form>
                 <v-text-field
@@ -54,12 +54,12 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn style="border-radius: 20px;" class="ma-2" color="#F0F0F0" purple @click="backToLogin">
+              <v-btn style="border-radius: 20px;" class="ma-2" color="#F0F0F0" @click="backToLogin">
                 <v-icon left>mdi-arrow-left</v-icon>Back
               </v-btn>
 
               <v-spacer></v-spacer>
-              <v-btn block center class="btnLogin" color="purple" @click="register" :loading="loading">Register</v-btn>
+              <v-btn block center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register</v-btn>
             </v-card-actions>
           </v-card>
         </v-layout>

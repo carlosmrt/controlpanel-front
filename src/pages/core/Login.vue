@@ -6,7 +6,7 @@
             <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
               <v-card-text>
                 <div class="layout column align-center" style="margin: 10%">
-                  <img src="static/crypto_suite_logo.png">
+                  <img src="static/logo_small.png">
                 </div>
                 <v-form>
                   <v-text-field
@@ -32,7 +32,7 @@
               <v-card-actions>
                 <a @click="register">Need a CryptoBoard account? Sign up</a>
                 <v-spacer></v-spacer>
-                <v-btn block class="btnLogin" color="purple" @click="login" :loading="loading">Login</v-btn>
+                <v-btn block dark class="btnLogin" color="#c700ff" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
             </v-card>
         </v-layout>

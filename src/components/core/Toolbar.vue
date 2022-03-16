@@ -5,7 +5,7 @@
     color="#C2C2C2"
     class="toolbar">
     <router-link :to="{ name: 'Dashboard' }">
-      <img src="static/crypto_suite_logo.png" width="50%" class="icon-image"></img>
+      <img src="static/logo_small.png" width="50%" class="icon-image"></img>
     </router-link>
     <router-link :to="{ name: 'Dashboard' }" class="text">
     </router-link>
