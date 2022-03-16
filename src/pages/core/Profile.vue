@@ -139,7 +139,7 @@ export default {
         vm.result = "Update Error.";
         vm.showResult = true;
       }
-      // window.location.reload(true);
+
       this.$notification.dark("User Updated Successfully!", {timer: 3});
       this.$root.$emit('userUpdated');
     },
