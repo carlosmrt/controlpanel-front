@@ -14,7 +14,7 @@
     <v-menu class="toolbar-menu-item" offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
       <v-btn icon large flat slot="activator" :ripple="false">
         <v-avatar color="#F8F5F5" size="42px">
-          <a style="color: #8A4086;;">{{ user ? getInitials() : '' }}</a>
+          <a style="color: #8A4086;">{{ user ? getInitials() : '' }}</a>
         </v-avatar>
       </v-btn>
       <v-list>
