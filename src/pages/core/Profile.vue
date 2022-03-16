@@ -1,18 +1,95 @@
 <template>
   <v-container>
-    <v-avatar color="#F8F5F5" size="100px">
-      <a style="color: #8A4086;;">{{ user ? getInitials() : '' }}</a>
-    </v-avatar>
-    {{user.firstName}} {{user.lastName}}
+    <v-btn style="border-radius: 20px;"  color="#F0F0F0" @click="backToCryptoBoards">
+      <v-icon left>mdi-arrow-left</v-icon>Back
+    </v-btn>
+    <v-spacer></v-spacer>
+    <v-container style="width: 60%;margin-left: 20%;">
+      <v-avatar color="#F8F5F5" size="100px">
+        <a style="color: #8A4086;font-size: 24px;">{{getInitials()}}</a>
+      </v-avatar>
+      <a class="ma-3" style="color: black;font-size: 18px;">{{user.firstName}} {{user.lastName}}</a>
+      <v-form class="mt-5" width="30%">
+        <v-text-field
+          append-icon="person"
+          name="firstName"
+          label="First Name"
+          type="text"
+          v-model="user.firstName"
+          :error="error"
+          :rules="[rules.required]"/>
+        <v-text-field
+          append-icon="person"
+          name="lastName"
+          label="Last Name"
+          type="text"
+          v-model="user.lastName"
+          :error="error"
+          :rules="[rules.required]"/>
+        <v-text-field
+          append-icon="person"
+          name="email"
+          label="Email"
+          type="text"
+          v-model="user.email"
+          :error="error"
+          :rules="[rules.required]"/>
+        <v-spacer></v-spacer>
+        <v-text-field
+          :type="hidePassword ? 'password' : 'text'"
+          :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
+          name="password"
+          label="Password"
+          v-model="password"
+          :error="error"
+          @click:append="hidePassword = !hidePassword"/>
+        <v-text-field
+          :type="hideNewPassword ? 'password' : 'text'"
+          :append-icon="hideNewPassword ? 'visibility_off' : 'visibility'"
+          name="password"
+          label="New Password"
+          v-model="newPassword"
+          :error="error"
+          @click:append="hideNewPassword = !hideNewPassword"/>
+        <v-text-field
+          :type="hideConfirmNewPassword ? 'password' : 'text'"
+          :append-icon="hideConfirmNewPassword ? 'visibility_off' : 'visibility'"
+          name="password"
+          label="Confirm New Password"
+          v-model="confirmNewPassword"
+          :error="error"
+          @click:append="hideConfirmNewPassword = !hideConfirmNewPassword"/>
+      </v-form>
+      <v-btn style="width:20%; border-radius: 20px;" block center class="btnLogin" color="#c700ff" @click="updateUser" dark :loading="loading">Save</v-btn>
+    </v-container>
+
   </v-container>
 </template>
 <script>
 import UserMe from "../../services/Api/CoreContext/User/UserMe";
+import UpdateUser from "../../services/Api/CoreContext/User/UpdateUser";
 
 export default {
   data() {
     return{
-      user: null,
+      user: {
+        firstName : '',
+        lastName : '',
+        email : '',
+      },
+      loading: false,
+      password: null,
+      newPassword: null,
+      confirmNewPassword: null,
+      hidePassword: true,
+      hideNewPassword: true,
+      hideConfirmNewPassword: true,
+      error: false,
+      showResult: false,
+      result: '',
+      rules: {
+        required: value => !!value || 'Required.'
+      }
     }
   },
   methods: {
@@ -32,7 +109,40 @@ export default {
       }
 
       return initials.toUpperCase();
-    }
+    },
+    backToCryptoBoards(){
+      this.$router.push("/dashboard")
+    },
+    async updateUser() {
+      const vm = this;
+
+      if (!this.user.email || !this.user.firstName || !this.user.lastName) {
+
+        vm.result = "Email and Password can't be null.";
+        vm.showResult = true;
+
+        return;
+      }
+
+      if (vm.newPassword !== vm.confirmNewPassword){
+
+        vm.result = "Passwords don't match";
+        vm.showResult = true;
+
+        return;
+      }
+
+      try{
+        await UpdateUser.update(this.user.firstName,this.user.lastName,this.user.email, this.password, this.newPassword);
+      }catch (error){
+        vm.error = true;
+        vm.result = "Update Error.";
+        vm.showResult = true;
+      }
+      // window.location.reload(true);
+      this.$notification.dark("User Updated Successfully!", {timer: 3});
+      this.$root.$emit('userUpdated');
+    },
   },
   mounted() {
     this.getUser()

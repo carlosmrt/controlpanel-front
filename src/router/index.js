@@ -5,6 +5,7 @@ import Dashboard from '../pages/crypto/Dashboard.vue';
 import Login from '../pages/core/Login.vue';
 import Error from '../pages/core/Error.vue';
 import Register from "../pages/core/Register";
+import Profile from "../pages/core/Profile";
 
 
 
@@ -19,6 +20,16 @@ export default new Router({
       meta: {
         breadcrumb: [
           { name: 'dashboard' }
+        ]
+      }
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+      meta: {
+        breadcrumb: [
+          { name: 'profile' }
         ]
       }
     },
