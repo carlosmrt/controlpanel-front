@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    container_name: controlpanel-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: node:lts-alpine
+    ports:
+      - '8080:80'
+    working_dir: /controlpanel
+    volumes:
+    - ./:/controlpanel
+    command: sh -c "npm install && npm run start"
