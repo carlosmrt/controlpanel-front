@@ -12,6 +12,14 @@
             clearable
             label="Name"
           />
+          <v-autocomplete
+            :items="fiatCoins"
+            v-model="selectedFiatCoin"
+            :item-text="'name'"
+            :item-value="'id'"
+            clearable
+            label="Select Fiat Coin"
+          />
           <div class="float">
             <v-btn class="mx-0 mt-3" color="purple" dark @click="submit(), dashboardDialog = false">Add</v-btn>
           </div>
@@ -29,11 +37,22 @@ export default {
     return {
       name: null,
       dashboardDialog: false,
+      selectedFiatCoin: null,
+      fiatCoins: [
+        {
+          id: '1505',
+          name: 'USD $'
+        },
+        {
+          id: '1506',
+          name: 'EUR €'
+        }
+      ]
     }
   },
   methods: {
     submit() {
-      AddDashboard.addDashboard(this.name).then(() => {
+      AddDashboard.addDashboard(this.name,this.selectedFiatCoin).then(() => {
         this.$emit("dashboardAdded");
       })
     },

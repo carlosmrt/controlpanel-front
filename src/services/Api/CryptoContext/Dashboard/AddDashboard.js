@@ -1,11 +1,12 @@
 import API from "../../Api";
 
 export default {
-  addDashboard(name) {
+  addDashboard(name,fiatCoinId) {
     return API.METHODS.post(
         API.CRYPTO_CONTEXT_PATH + '/dashboard/create',
         {
-          name: name
+          name: name,
+          fiatCoinId
         }
     );
   }
