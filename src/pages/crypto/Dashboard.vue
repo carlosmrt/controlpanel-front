@@ -24,11 +24,13 @@
   </v-container>
 </template>
 <script>
+
 import CryptoIframe from "../../components/crypto/CryptoIframe";
 import DashboardList from "../../services/Api/CryptoContext/Dashboard/DashboardList";
 import AddCryptoModal from "../../components/crypto/AddCryptoModal";
 import AddDashboardModal from "../../components/crypto/AddDashboardModal";
 import DropDownSettings from "../../components/crypto/DropDownSettings";
+
 export default {
   components: {AddDashboardModal, AddCryptoModal, CryptoIframe, DropDownSettings},
   data() {
