@@ -1,13 +1,19 @@
 <template>
   <v-container fluid grid-list-x1>
     <v-layout>
+
       <v-tabs style="width: 100%" slider-color="purple">
         <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
       </v-tabs>
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
+<!--    <AddCryptoModal :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"></AddCryptoModal>-->
+    <v-container max-width="500px">
+      <div style="float: right">
+      <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
+      </div>
+    </v-container>
 
-    <v-container max-width="500px"><div style="float: right"><AddCryptoModal :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"></AddCryptoModal></div></v-container>
     <v-container flex items-center justify-center>
 
     <v-layout v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
@@ -22,9 +28,9 @@ import CryptoIframe from "../../components/crypto/CryptoIframe";
 import DashboardRetrieve from "../../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
 import AddCryptoModal from "../../components/crypto/AddCryptoModal";
 import AddDashboardModal from "../../components/crypto/AddDashboardModal";
-
+import DropDownSettings from "../../components/crypto/DropDownSettings";
 export default {
-  components: {AddDashboardModal, AddCryptoModal, CryptoIframe},
+  components: {AddDashboardModal, AddCryptoModal, CryptoIframe, DropDownSettings},
   data() {
     return {
       dashboards: null,

@@ -1,6 +1,5 @@
 <template>
  <v-dialog v-model="coinDialog" max-width="500px">
-   <v-btn slot="activator" fab dark color="purple"><v-icon dark>mdi-plus</v-icon></v-btn>
    <v-card>
      <v-card-title>
        <h2>Add Crypto</h2>
@@ -16,7 +15,7 @@
             label="Select Crypto"
           />
           <div class="float">
-            <v-btn class="mx-0 mt-3" color="purple" dark @click="submit(), coinDialog = false">Add</v-btn>
+            <v-btn class="mx-0 mt-3" color="purple" dark @click="submit();">Add</v-btn>
           </div>
         </v-form>
       </v-card-text>
@@ -29,13 +28,17 @@ import AddCoinToDashboard from "../../services/Api/CryptoContext/Dashboard/AddCo
 import CoinsList from "../../services/Api/CryptoContext/Dashboard/CoinsList";
 export default {
   props: {
-    dashboardId: String
+    dashboardId: String,
+    show: {
+      type: Boolean,
+      default: false
+    }
   },
-  data() {
-    return {
+  data: function () {
+    return{
       selectedCoin: null,
       coins: null,
-      coinDialog: false,
+      coinDialog: this.show,
     }
   },
   methods: {
@@ -43,15 +46,26 @@ export default {
       AddCoinToDashboard.addCoin(this.dashboardId, this.selectedCoin).then(() => {
         this.$emit("coinAdded");
       })
+      this.coinDialog = false;
     },
     getCoins() {
       CoinsList.list().then((response) => {
           this.coins = response.data;
         });
-    }
+    },
   },
   mounted() {
     this.getCoins()
+  },
+  watch: {
+    show: function (value) {
+      this.coinDialog = value;
+    },
+    coinDialog: function (value){
+      if(!value){
+        this.$emit('addCryptoModalClosed');
+      }
+    }
   }
 }
 </script>
