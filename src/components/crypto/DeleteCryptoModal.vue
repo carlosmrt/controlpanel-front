@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import AddCoinToDashboard from "../../services/Api/CryptoContext/Dashboard/AddCoinToDashboard";
-import CoinsList from "../../services/Api/CryptoContext/Dashboard/CoinsList";
+
 import DashboardCoinsList from "../../services/Api/CryptoContext/Dashboard/DashboardCoinsList";
 import DeleteCoin from "../../services/Api/CryptoContext/Dashboard/DeleteCoin";
+
 export default {
   props: {
     dashboardId: String,
