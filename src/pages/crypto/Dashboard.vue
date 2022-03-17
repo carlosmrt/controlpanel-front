@@ -7,7 +7,7 @@
       </v-tabs>
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
-<!--    <AddCryptoModal :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"></AddCryptoModal>-->
+
     <v-container max-width="500px">
       <div style="float: right">
       <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
