@@ -39,6 +39,12 @@
       @coinDeleted="updateDashboardsPage('coinAdded')"
       @deleteCryptoModalClosed="updateShowDeleteCryptoModal()"
     />
+    <DeleteDashboardModal
+      :show="showDeleteDashboardModal"
+      :dashboard-id="dashboardId"
+      @dashboardDeleted="updateDashboardsPage('coinAdded')"
+      @deleteDashboardModalClosed="updateShowDeleteDashboardModal()"
+    />
   </div>
 </template>
 
@@ -46,9 +52,10 @@
 import AddCryptoModal from "./AddCryptoModal";
 import EditDashboardModal from "./EditDashboardModal";
 import DeleteCryptoModal from "./DeleteCryptoModal";
+import DeleteDashboardModal from "./DeleteDashboardModal";
 
 export default {
-  components: {DeleteCryptoModal, EditDashboardModal, AddCryptoModal},
+  components: {DeleteDashboardModal, DeleteCryptoModal, EditDashboardModal, AddCryptoModal},
   props: {
     dashboardId: String,
   },
@@ -74,6 +81,7 @@ export default {
     showAddCryptoModal: false,
     showEditDashboardModal: false,
     showDeleteCryptoModal: false,
+    showDeleteDashboardModal: false,
     selectedFiatCoin: null,
   }),
   methods: {
@@ -89,11 +97,16 @@ export default {
       if(data === 'deleteCrypto'){
         this.showDeleteCryptoModal = true;
       }
+
+      if(data === 'deleteDashboard'){
+        this.showDeleteDashboardModal = true;
+      }
     },
     updateDashboardsPage(value){
       this.showAddCryptoModal = false;
       this.showEditDashboardModal = false;
       this.showDeleteCryptoModal = false;
+      this.showDeleteDashboardModal = false;
       this.$emit(value);
     },
     updateShowAddCryptoModal(){
@@ -104,6 +117,9 @@ export default {
     },
     updateShowDeleteCryptoModal(){
       this.showDeleteCryptoModal = false;
+    },
+    updateShowDeleteDashboardModal(){
+      this.showDeleteDashboardModal = false;
     },
   },
 }

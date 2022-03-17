@@ -21,7 +21,7 @@
             label="Select Fiat Coin"
           />
           <div class="float">
-            <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit(), dashboardDialog = false">Add</v-btn>
+            <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit();">Add</v-btn>
           </div>
         </v-form>
       </v-card-text>
@@ -54,6 +54,7 @@ export default {
     submit() {
       AddDashboard.addDashboard(this.name,this.selectedFiatCoin).then(() => {
         this.$emit("dashboardAdded");
+        this.dashboardDialog = false;
       })
     },
   },
