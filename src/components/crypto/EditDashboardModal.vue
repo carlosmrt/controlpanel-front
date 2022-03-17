@@ -30,6 +30,7 @@
 
 <script>
 import UpdateDashboard from "../../services/Api/CryptoContext/Dashboard/UpdateDashboard";
+import DashboardRetrieve from "../../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
 
 export default {
   props: {
@@ -62,12 +63,18 @@ export default {
         this.$emit("dashboardUpdated");
         this.editDashboardDialog = false;
       })
-
+    },
+    getDashboard(){
+      DashboardRetrieve.retrieve(this.dashboardId).then((response) => {
+        this.name = response.data.name;
+        this.selectedFiatCoin = response.data.fiatCoinId;
+      })
     }
   },
   watch: {
     show: function (value) {
       this.editDashboardDialog = value;
+      this.getDashboard();
     },
     editDashboardDialog: function (value){
       if(!value){
