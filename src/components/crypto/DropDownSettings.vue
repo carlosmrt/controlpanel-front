@@ -3,11 +3,12 @@
     <v-menu offset-y>
       <template slot="activator">
         <v-btn
+          style="border-radius: 20px;"
           color="purple"
           dark
         >
-          <v-icon dark>mdi-wrench</v-icon>
-          Settings
+          <v-icon dark>menu</v-icon>
+
         </v-btn>
       </template>
       <v-list>
@@ -32,24 +33,27 @@
       @dashboardUpdated="updateDashboardsPage('coinAdded')"
       @editDashboardModalClosed="updateShowEditDashboardModal()"
     />
+    <DeleteCryptoModal
+      :show="showDeleteCryptoModal"
+      :dashboard-id="dashboardId"
+      @coinDeleted="updateDashboardsPage('coinAdded')"
+      @deleteCryptoModalClosed="updateShowDeleteCryptoModal()"
+    />
   </div>
 </template>
 
 <script>
 import AddCryptoModal from "./AddCryptoModal";
 import EditDashboardModal from "./EditDashboardModal";
+import DeleteCryptoModal from "./DeleteCryptoModal";
 
 export default {
-  components: {EditDashboardModal, AddCryptoModal},
+  components: {DeleteCryptoModal, EditDashboardModal, AddCryptoModal},
   props: {
     dashboardId: String,
   },
   data: () => ({
     items: [
-      {
-        title: 'Edit',
-        id: 'editDashboard'
-      },
       {
         title: 'Add Crypto',
         id: 'addCrypto'
@@ -57,22 +61,20 @@ export default {
       {
         title: 'Delete Crypto',
         id: 'deleteCrypto'
-      }
-    ],
-    name: null,
-    showAddCryptoModal: false,
-    showEditDashboardModal: false,
-    selectedFiatCoin: null,
-    fiatCoins: [
-      {
-        id: '1505',
-        name: 'USD $'
       },
       {
-        id: '1506',
-        name: 'EUR €'
+        title: 'Edit CryptoBoard',
+        id: 'editDashboard'
+      },
+      {
+        title: 'Delete CryptoBoard',
+        id: 'deleteDashboard'
       }
-    ]
+    ],
+    showAddCryptoModal: false,
+    showEditDashboardModal: false,
+    showDeleteCryptoModal: false,
+    selectedFiatCoin: null,
   }),
   methods: {
     openModal(data){
@@ -81,13 +83,17 @@ export default {
       }
 
       if(data === 'editDashboard'){
-        console.log('dd');
         this.showEditDashboardModal = true;
+      }
+
+      if(data === 'deleteCrypto'){
+        this.showDeleteCryptoModal = true;
       }
     },
     updateDashboardsPage(value){
       this.showAddCryptoModal = false;
       this.showEditDashboardModal = false;
+      this.showDeleteCryptoModal = false;
       this.$emit(value);
     },
     updateShowAddCryptoModal(){
@@ -95,6 +101,9 @@ export default {
     },
     updateShowEditDashboardModal(){
       this.showEditDashboardModal = false;
+    },
+    updateShowDeleteCryptoModal(){
+      this.showDeleteCryptoModal = false;
     },
   },
 }

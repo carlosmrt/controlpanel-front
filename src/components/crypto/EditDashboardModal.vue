@@ -20,7 +20,7 @@
             label="Select Fiat Coin"
           />
           <div class="float">
-            <v-btn class="mx-0 mt-3" color="purple" dark @click="submit();">Update</v-btn>
+            <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit();">Update</v-btn>
           </div>
         </v-form>
       </v-card-text>
