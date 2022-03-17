@@ -45,8 +45,8 @@ export default {
     submit() {
       AddCoinToDashboard.addCoin(this.dashboardId, this.selectedCoin).then(() => {
         this.$emit("coinAdded");
+        this.coinDialog = false;
       })
-      this.coinDialog = false;
     },
     getCoins() {
       CoinsList.list().then((response) => {

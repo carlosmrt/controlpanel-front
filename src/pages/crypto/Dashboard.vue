@@ -25,7 +25,7 @@
 </template>
 <script>
 import CryptoIframe from "../../components/crypto/CryptoIframe";
-import DashboardRetrieve from "../../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
+import DashboardList from "../../services/Api/CryptoContext/Dashboard/DashboardList";
 import AddCryptoModal from "../../components/crypto/AddCryptoModal";
 import AddDashboardModal from "../../components/crypto/AddDashboardModal";
 import DropDownSettings from "../../components/crypto/DropDownSettings";
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getDashboards(event) {
-      DashboardRetrieve.retrieve().then((response) => {
+      DashboardList.list().then((response) => {
           this.dashboards = response.data
 
           if(event === 'dashboardAdded'){

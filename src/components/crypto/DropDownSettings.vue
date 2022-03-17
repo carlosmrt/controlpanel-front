@@ -20,15 +20,27 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-    <AddCryptoModal :show="showAddCryptoModal" :dashboard-id="dashboardId" @coinAdded="updateDashboardsPage('coinAdded')" @addCryptoModalClosed="updateShowAddCryptoModal()"/>
+    <AddCryptoModal
+      :show="showAddCryptoModal"
+      :dashboard-id="dashboardId"
+      @coinAdded="updateDashboardsPage('coinAdded')"
+      @addCryptoModalClosed="updateShowAddCryptoModal()"
+    />
+    <EditDashboardModal
+      :show="showEditDashboardModal"
+      :dashboard-id="dashboardId"
+      @dashboardUpdated="updateDashboardsPage('coinAdded')"
+      @editDashboardModalClosed="updateShowEditDashboardModal()"
+    />
   </div>
 </template>
 
 <script>
 import AddCryptoModal from "./AddCryptoModal";
-import AddDashboard from "../../services/Api/CryptoContext/Dashboard/AddDashboard";
+import EditDashboardModal from "./EditDashboardModal";
+
 export default {
-  components: {AddCryptoModal},
+  components: {EditDashboardModal, AddCryptoModal},
   props: {
     dashboardId: String,
   },
@@ -36,7 +48,7 @@ export default {
     items: [
       {
         title: 'Edit',
-        id: 'edit'
+        id: 'editDashboard'
       },
       {
         title: 'Add Crypto',
@@ -49,6 +61,7 @@ export default {
     ],
     name: null,
     showAddCryptoModal: false,
+    showEditDashboardModal: false,
     selectedFiatCoin: null,
     fiatCoins: [
       {
@@ -62,22 +75,26 @@ export default {
     ]
   }),
   methods: {
-    submit() {
-      AddDashboard.addDashboard(this.name,this.selectedFiatCoin).then(() => {
-        this.$emit("dashboardAdded");
-      })
-    },
     openModal(data){
       if(data === 'addCrypto'){
         this.showAddCryptoModal = true;
       }
+
+      if(data === 'editDashboard'){
+        console.log('dd');
+        this.showEditDashboardModal = true;
+      }
     },
     updateDashboardsPage(value){
       this.showAddCryptoModal = false;
+      this.showEditDashboardModal = false;
       this.$emit(value);
     },
     updateShowAddCryptoModal(){
       this.showAddCryptoModal = false;
+    },
+    updateShowEditDashboardModal(){
+      this.showEditDashboardModal = false;
     },
   },
 }
