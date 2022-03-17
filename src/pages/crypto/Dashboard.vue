@@ -41,7 +41,7 @@ export default {
   methods: {
     getDashboards(event) {
       DashboardList.list().then((response) => {
-          this.dashboards = response.data
+          this.dashboards = response.data;
 
           if(event === 'dashboardAdded'){
             this.tab = null;
