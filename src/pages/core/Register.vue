@@ -112,22 +112,15 @@ export default {
         return;
       }
 
-      try{
-        const register = await UserRegister.register(this.firstName,this.lastName,this.email, this.password);
-      }catch (error){
-        vm.error = true;
-        vm.result = "Register Error.";
-        vm.showResult = true;
-      }
-
       try {
+        const register = await UserRegister.register(this.firstName,this.lastName,this.email, this.password);
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token',res.data.token)
         this.$router.push("/dashboard")
         this.$notification.dark("Welcome "+ this.firstName +" to CryptoBoard!", {timer: 3});
       } catch (error) {
         vm.error = true;
-        vm.result = "Email or Password is incorrect.";
+        vm.result = "Register Error.";
         vm.showResult = true;
       }
     },
