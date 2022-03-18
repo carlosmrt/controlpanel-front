@@ -8,11 +8,9 @@
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
 
-    <v-container width="500px">
-      <div style="float: right;width: 5%;">
-      <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
-      </div>
-    </v-container>
+    <div style="float: right;display: block;width: 140px;">
+    <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
+    </div>
 
     <v-container flex items-center justify-center>
 
