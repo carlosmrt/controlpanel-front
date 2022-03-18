@@ -8,8 +8,8 @@
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
 
-    <v-container max-width="500px">
-      <div style="float: right">
+    <v-container width="500px">
+      <div style="float: right;width: 5%;">
       <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
       </div>
     </v-container>
@@ -53,8 +53,8 @@ export default {
             this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
           }
         },
-        (err) => {
-          this.$notification.error("Error Inesperado", {timer: 3});
+        () => {
+          this.$notification.error("Internal Error", {timer: 3});
         });
     }
   },
