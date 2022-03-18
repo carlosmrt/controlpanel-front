@@ -14,8 +14,8 @@
             clearable
             label="Select Crypto"
           />
-          <div class="float">
-            <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit();">Add</v-btn>
+          <div>
+            <v-btn style="border-radius: 20px;" color="purple" dark @click="submit();">Add</v-btn>
           </div>
         </v-form>
       </v-card-text>
@@ -26,6 +26,7 @@
 <script>
 import AddCoinToDashboard from "../../services/Api/CryptoContext/Dashboard/AddCoinToDashboard";
 import CoinsList from "../../services/Api/CryptoContext/Dashboard/CoinsList";
+
 export default {
   props: {
     dashboardId: String,
@@ -43,10 +44,14 @@ export default {
   },
   methods: {
     submit() {
-      AddCoinToDashboard.addCoin(this.dashboardId, this.selectedCoin).then(() => {
-        this.$emit("coinAdded");
-        this.coinDialog = false;
-      })
+        AddCoinToDashboard.addCoin(this.dashboardId, this.selectedCoin).then(() => {
+          this.$emit("coinAdded");
+          this.coinDialog = false;
+        },
+        (e) => {
+          this.$notification.error("Limit Reached", {timer: 3});
+          this.coinDialog = false;
+        })
     },
     getCoins() {
       CoinsList.list().then((response) => {

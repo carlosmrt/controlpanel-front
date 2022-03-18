@@ -2,7 +2,7 @@
   <v-container fluid grid-list-x1>
     <v-layout>
 
-      <v-tabs style="width: 100%" slider-color="purple">
+      <v-tabs  style="width: 100%" slider-color="purple">
         <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
       </v-tabs>
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>

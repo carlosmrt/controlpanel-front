@@ -5,7 +5,7 @@
        <h2>Delete CryptoBoard</h2>
      </v-card-title>
       <v-card-text>
-        <p>Are you sure you want to delete {{dashboard.name}}?</p>
+        <p>Are you sure you want to delete {{name}}?</p>
           <div class="float">
             <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit();">Delete</v-btn>
           </div>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       deleteDashboardDialog: false,
-      dashboard: null
+      name: ''
     }
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
     },
     getDashboard(){
       DashboardRetrieve.retrieve(this.dashboardId).then((response) => {
-        this.dashboard = response.data;
+        this.name = response.data.name;
       })
     },
   },

@@ -117,7 +117,7 @@ export default {
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token',res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome "+ this.firstName +" to CryptoBoard!", {timer: 3});
+        this.$notification.dark("Welcome "+ this.firstName +" To CryptoBoard!", {timer: 3});
       } catch (error) {
         vm.error = true;
         vm.result = "Register Error.";

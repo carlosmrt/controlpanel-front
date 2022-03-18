@@ -82,7 +82,7 @@ export default {
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token',res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome back!", {timer: 3});
+        this.$notification.dark("Welcome Back!", {timer: 3});
       } catch (error) {
         vm.error = true;
         vm.result = "Email or Password is incorrect.";
