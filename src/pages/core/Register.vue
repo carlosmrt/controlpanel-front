@@ -1,6 +1,13 @@
 <template>
-  <v-app id="register" class="background">
-    <v-content>
+  <v-app id="register" style="background-color: #1D2330;">
+    <vue-particles
+      color="#FF00FF"
+      :particlesNumber="20"
+      linesColor="#FF00FF"
+      :clickEffect="false"
+      :hoverEffect="false">
+    </vue-particles>
+    <div class="centered-text">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
@@ -64,7 +71,7 @@
           </v-card>
         </v-layout>
       </v-container>
-    </v-content>
+    </div>
   </v-app>
 </template>
 
@@ -142,10 +149,6 @@ export default {
     z-index: 0;
   }
 
-  .background{
-    background-image: url(/static/background.jpg);
-  }
-
   .border-card{
     border-radius: 5%;
     background-color: #F0F0F0;
@@ -155,5 +158,11 @@ export default {
     color: #F0F0F0;
     font-weight: bold;
     border-radius: 20px;
+  }
+  .centered-text {
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    width: 100%;
   }
 </style>

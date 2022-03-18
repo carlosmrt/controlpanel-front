@@ -1,6 +1,12 @@
 <template>
-  <v-app id="login" class="background">
-    <v-content>
+  <v-app id="login"  style="background-color: #1D2330;">
+    <vue-particles
+      color="#FF00FF"
+      linesColor="#FF00FF"
+      :clickEffect="false"
+      :hoverEffect="false">
+    </vue-particles>
+    <div v-if="!showRegister" class="centered-text">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
             <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
@@ -30,7 +36,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <a @click="register">Need a CryptoBoard account? Sign up</a>
+                <a @click="showRegisterFunction">Need a CryptoBoard account? Sign up</a>
                 <v-spacer></v-spacer>
                 <v-btn block dark class="btnLogin" color="#c700ff" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
@@ -43,12 +49,78 @@
         top>
         {{ result }}
       </v-snackbar>
-    </v-content>
+    </div>
+    <div v-if="showRegister" class="centered-text-register">
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
+            <v-card-text>
+              <div class="layout column align-center" style="margin: 10%">
+                <img src="static/logo_small.png">
+              </div>
+              <v-form>
+                <v-text-field
+                  append-icon="person"
+                  name="firstName"
+                  label="First Name"
+                  type="text"
+                  v-model="firstName"
+                  :error="error"
+                  :rules="[rules.required]"/>
+                <v-text-field
+                  append-icon="person"
+                  name="lastName"
+                  label="Last Name"
+                  type="text"
+                  v-model="lastName"
+                  :error="error"
+                  :rules="[rules.required]"/>
+                <v-text-field
+                  append-icon="person"
+                  name="email"
+                  label="Email"
+                  type="text"
+                  v-model="registerEmail"
+                  :error="error"
+                  :rules="[rules.required]"/>
+                <v-text-field
+                  :type="registerHidePassword ? 'password' : 'text'"
+                  :append-icon="registerHidePassword ? 'visibility_off' : 'visibility'"
+                  name="password"
+                  label="Password"
+                  :rules="[rules.required]"
+                  v-model="registerPassword"
+                  :error="error"
+                  @click:append="registerHidePassword = !registerHidePassword"/>
+                <v-text-field
+                  :type="hideConfirmPassword ? 'password' : 'text'"
+                  :append-icon="hideConfirmPassword ? 'visibility_off' : 'visibility'"
+                  name="password"
+                  label="Confirm Password"
+                  :rules="[rules.required]"
+                  v-model="confirmPassword"
+                  :error="error"
+                  @click:append="hideConfirmPassword = !hideConfirmPassword"/>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn style="border-radius: 20px;" class="ma-2" color="#F0F0F0" @click="backToLogin">
+                <v-icon left>mdi-arrow-left</v-icon>Back
+              </v-btn>
+
+              <v-spacer></v-spacer>
+              <v-btn block center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-layout>
+      </v-container>
+    </div>
   </v-app>
 </template>
 
 <script>
 import UserLogin from "../../services/Api/CoreContext/User/UserLogin";
+import UserRegister from "../../services/Api/CoreContext/User/UserRegister";
 
 export default {
   data() {
@@ -60,6 +132,14 @@ export default {
       error: false,
       showResult: false,
       result: '',
+      showRegister: false,
+      registerEmail: '',
+      firstName: '',
+      lastName: '',
+      registerPassword: '',
+      confirmPassword: '',
+      registerHidePassword: true,
+      hideConfirmPassword: true,
       rules: {
         required: value => !!value || 'Required.'
       }
@@ -89,27 +169,59 @@ export default {
         vm.showResult = true;
       }
     },
-    register(){
-      this.$router.push("/register")
+    showRegisterFunction(){
+      this.showRegister = true;
+      // this.$router.push("/register")
+    },
+    async register() {
+      const vm = this;
+
+      if (!vm.registerEmail || !vm.registerPassword || !vm.firstName || !vm.lastName || !vm.confirmPassword) {
+
+        vm.result = "Email and Password can't be null.";
+        vm.showResult = true;
+
+        return;
+      }
+
+      if (vm.registerPassword !== vm.confirmPassword){
+
+        vm.result = "Passwords don't match";
+        vm.showResult = true;
+
+        return;
+      }
+
+      try {
+        const register = await UserRegister.register(this.firstName,this.lastName,this.registerEmail, this.registerPassword);
+        const res = await UserLogin.login(this.registerEmail, this.registerPassword);
+        sessionStorage.setItem('token',res.data.token)
+        this.$router.push("/dashboard")
+        this.$notification.dark("Welcome "+ this.firstName +" To CryptoBoard!", {timer: 3});
+      } catch (error) {
+        vm.error = true;
+        vm.result = "Register Error.";
+        vm.showResult = true;
+      }
+    },
+    backToLogin(){
+      // this.$router.push("/")
+      this.showRegister = false;
     }
   }
 }
 </script>
 
 <style scoped lang="css">
-  #login {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "";
-    z-index: 0;
-  }
-
-  .background{
-    background-image: url(/static/background.jpg);
-  }
+  /*#login {*/
+  /*  height: 100%;*/
+  /*  width: 100%;*/
+  /*  position: absolute;*/
+  /*  top: 0;*/
+  /*  left: 0;*/
+  /*  content: "";*/
+  /*  z-index: 0;*/
+  /*}*/
 
   .border-card{
     border-radius: 5%;
@@ -120,5 +232,17 @@ export default {
     color: #F0F0F0;
     font-weight: bold;
     border-radius: 20px;
+  }
+
+  .centered-text {
+    position: absolute;
+    margin-top: 2%;
+    width: 100%;
+  }
+
+  .centered-text-register {
+    position: absolute;
+    margin-top: 2%;
+    width: 100%;
   }
 </style>

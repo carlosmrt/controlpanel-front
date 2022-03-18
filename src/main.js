@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import VueParticles from 'vue-particles'
 
 import 'vuetify/dist/vuetify.min.css';
 import 'font-awesome/css/font-awesome.css';
@@ -16,7 +17,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios);
-
+Vue.use(VueParticles);
 import fullCalendar from 'vue-fullcalendar';
 import {setupComponents} from './config/setup-components';
 
@@ -49,8 +50,6 @@ new Vue({
   template: '<App/>',
   data: {
     themeColor: '#1D2939',
-    userEmail: 'admin@yopmail.com',
-    userPassword: '123456'
   },
   methods: {
     setLanguage(language) {
