@@ -109,7 +109,7 @@
               </v-btn>
 
               <v-spacer></v-spacer>
-              <v-btn block center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register</v-btn>
+              <v-btn block dark center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register</v-btn>
             </v-card-actions>
           </v-card>
         </v-layout>
