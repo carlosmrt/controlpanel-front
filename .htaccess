@@ -1,1 +1,2 @@
-ErrorDocument 404 ./dist/index.html
+RewriteEngine on
+RewriteRule ^/$ /dist/index.html [L]
