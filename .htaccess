@@ -1,2 +1,1 @@
-RewriteEngine on
-RewriteRule ^/$ /dist/index.html [L]
+RewriteRule ^controlpanel-front/dist/(.+)$ https://cryptosuite.endinahosting.com//$1 [R=301,L]
