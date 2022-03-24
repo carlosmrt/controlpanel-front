@@ -9,11 +9,11 @@
     <div v-if="!showRegister" class="centered-text">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-            <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
+            <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3 border-card">
               <v-card-text>
-                <div class="layout column align-center" style="margin: 10%">
-                  <img src="static/logo_small.png">
-                </div>
+                <v-container>
+                  <v-img src="static/logo_small.png"/>
+                </v-container>
                 <v-form>
                   <v-text-field
                     append-icon="person"
@@ -36,7 +36,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <a @click="showRegisterFunction">Need a CryptoBoard account? Sign up</a>
+                <a @click="showRegisterFunction">Need a CryptoBoard account? <br/>Sign up</a>
                 <v-spacer></v-spacer>
                 <v-btn block dark class="btnLogin" color="#c700ff" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
@@ -53,11 +53,11 @@
     <div v-if="showRegister" class="centered-text-register">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-card flex items-center justify-center class="elevation-15 pa-3 border-card">
+          <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3"  style="border-radius: 20px;">
             <v-card-text>
-              <div class="layout column align-center" style="margin: 10%">
-                <img src="static/logo_small.png">
-              </div>
+              <v-container>
+                <v-img src="static/logo_small.png"/>
+              </v-container>
               <v-form>
                 <v-text-field
                   append-icon="person"
