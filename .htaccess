@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^controlpanel-front/(.*)$ /$1 [L]
+RewriteRule ^controlpanel-front/(.*)$ /$1 [L,R=301]
