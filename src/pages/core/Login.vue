@@ -9,7 +9,7 @@
     <div v-if="!showRegister" class="centered-text">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-            <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3 border-card">
+            <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3"  style="border-radius: 20px;">
               <v-card-text>
                 <v-container>
                   <v-img src="static/logo_small.png"/>
@@ -53,7 +53,7 @@
     <div v-if="showRegister" class="centered-text-register">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3"  style="border-radius: 20px;">
+          <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3" style="border-radius: 20px;">
             <v-card-text>
               <v-container>
                 <v-img src="static/logo_small.png"/>
