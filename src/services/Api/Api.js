@@ -9,10 +9,9 @@ const axiosAPI = axios.create({
 
 const apiRequest = (method, url, request) => {
   const headers = {
-    authorization: "Bearer " + sessionStorage.getItem('token'),
-    "Access-Control-Allow-Origin": 'https://cryptoboard.es'
+    authorization: "Bearer " + sessionStorage.getItem('token')
   };
-
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
   return axiosAPI({
     method,
