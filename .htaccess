@@ -13,5 +13,11 @@
 #RewriteEngine On
 #RewriteBase /
 #RewriteRule ^controlpanel-front/(.*)$ /$1 [L,NC,R]
-RewriteEngine On
-RewriteRule ^/controlpanel-front/(.+)/(.+)\[(.+)\](.+)/(.+)$ /$1 [R=301,L]
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteBase /
+
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^(.*)$ /controlpanel-front/$1 [L]
+</IfModule>
