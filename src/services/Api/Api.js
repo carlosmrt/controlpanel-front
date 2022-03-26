@@ -9,7 +9,7 @@ const axiosAPI = axios.create({
 
 const apiRequest = (method, url, request) => {
   const headers = {
-    authconnect: "Bearer " + sessionStorage.getItem('token')
+    authorization: "Bearer " + sessionStorage.getItem('token')
   };
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
