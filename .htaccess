@@ -13,7 +13,5 @@
 #RewriteEngine On
 #RewriteBase /
 #RewriteRule ^controlpanel-front/(.*)$ /$1 [L,NC,R]
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule (.+) /dist/$1 [L]
+RewriteEngine On
+RewriteRule ^controlpanel-front/(.*)$ /$1 [L,R=301]
