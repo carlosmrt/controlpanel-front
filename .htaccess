@@ -15,4 +15,3 @@
 #RewriteRule ^controlpanel-front/(.*)$ /$1 [L,NC,R]
 RewriteEngine On
 RewriteRule ^controlpanel-front/(.+)/(.+)\[(.+)\](.+)/(.+)$ /$1 [R=301,L]
-a
