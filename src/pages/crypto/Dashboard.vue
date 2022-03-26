@@ -9,7 +9,10 @@
     </v-layout>
 
     <div style="float: right;display: block;width: 140px;">
-    <DropDownSettings :dashboardId='tab' @coinAdded="getDashboards('coinAdded')"/>
+    <DropDownSettings
+      :dashboardId='tab'
+      @dashboardDeleted="getDashboards('dashboardDeleted')"
+      @coinAdded="getDashboards('coinAdded')"/>
     </div>
 
     <v-container flex items-center justify-center>
@@ -43,13 +46,14 @@ export default {
       DashboardList.list().then((response) => {
           this.dashboards = response.data;
 
-          if(event === 'dashboardAdded'){
+          if(event === 'dashboardAdded' || event === 'dashboardDeleted'){
             this.tab = null;
           }
 
           if(this.tab === null){
             this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
           }
+          console.log(this.tab);
         },
         () => {
           this.$notification.error("Internal Error", {timer: 3});

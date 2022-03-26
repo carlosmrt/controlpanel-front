@@ -1,6 +1,6 @@
 <template>
  <v-dialog v-model="editDashboardDialog" max-width="500px">
-   <v-card>
+   <v-card class="roundBorder">
      <v-card-title>
        <h2>Edit CryptoBoard</h2>
      </v-card-title>

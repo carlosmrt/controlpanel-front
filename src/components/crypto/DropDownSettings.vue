@@ -42,7 +42,7 @@
     <DeleteDashboardModal
       :show="showDeleteDashboardModal"
       :dashboard-id="dashboardId"
-      @dashboardDeleted="updateDashboardsPage('coinAdded')"
+      @dashboardDeleted="updateDashboardsPage('dashboardDeleted')"
       @deleteDashboardModalClosed="updateShowDeleteDashboardModal()"
     />
   </div>

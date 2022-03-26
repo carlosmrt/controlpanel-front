@@ -1,6 +1,6 @@
 <template>
  <v-dialog v-model="coinDialog" max-width="500px">
-   <v-card>
+   <v-card class="roundBorder">
      <v-card-title>
        <h2>Delete Crypto</h2>
      </v-card-title>
