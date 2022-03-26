@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-x1>
+  <v-container fluid >
     <v-layout>
 
       <v-tabs  style="width: 100%" slider-color="purple">

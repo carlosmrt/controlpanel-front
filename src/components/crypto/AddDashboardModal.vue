@@ -1,6 +1,9 @@
 <template>
  <v-dialog v-model="dashboardDialog" max-width="500px">
-   <v-btn class="right" style="float: right; border-radius: 20px;" slot="activator" dark color="purple"><v-icon dark>mdi-plus</v-icon>CryptoBoard</v-btn>
+   <v-btn class="right" style="float: right; border-radius: 20px;" slot="activator" dark color="purple">
+     <v-icon dark>mdi-plus</v-icon>
+     <span>CryptoBoard</span>
+   </v-btn>
    <v-card class="roundBorder">
      <v-card-title>
        <h2>Create CryptoBoard</h2>

@@ -108,7 +108,6 @@ export default {
 .toolbar {
   font-weight: bold;
   font-size: 18px;
-  height: 70px;
 }
 
 .toolbar .text {
