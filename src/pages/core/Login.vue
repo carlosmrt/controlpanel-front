@@ -1,5 +1,5 @@
 <template>
-  <v-app id="login"  style="background-color: #1D2330;">
+  <v-app id="login" style="background-color: #1D2330;">
     <vue-particles
       color="#FF00FF"
       linesColor="#FF00FF"
@@ -9,38 +9,38 @@
     <div v-if="!showRegister" class="centered-text">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-            <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3"  style="border-radius: 20px;">
-              <v-card-text>
-                <v-container>
-                  <v-img src="static/logo_small.png"/>
-                </v-container>
-                <v-form>
-                  <v-text-field
-                    append-icon="person"
-                    name="login"
-                    label="Email"
-                    type="text"
-                    v-model="email"
-                    :error="error"
-                    :rules="[rules.required]"/>
-                  <v-text-field
-                    :type="hidePassword ? 'password' : 'text'"
-                    :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
-                    name="password"
-                    label="Password"
-                    id="password"
-                    :rules="[rules.required]"
-                    v-model="password"
-                    :error="error"
-                    @click:append="hidePassword = !hidePassword"/>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <a @click="showRegisterFunction">Need a CryptoBoard account? <br/>Sign up</a>
-                <v-spacer></v-spacer>
-                <v-btn block dark class="btnLogin" color="#c700ff" @click="login" :loading="loading">Login</v-btn>
-              </v-card-actions>
-            </v-card>
+          <v-card width="500px" flex items-center justify-center class="elevation-15 pa-3" style="border-radius: 20px;">
+            <v-card-text>
+              <v-container>
+                <v-img src="static/logo_small.png"/>
+              </v-container>
+              <v-form>
+                <v-text-field
+                  append-icon="person"
+                  name="login"
+                  label="Email"
+                  type="text"
+                  v-model="email"
+                  :error="error"
+                  :rules="[rules.required]"/>
+                <v-text-field
+                  :type="hidePassword ? 'password' : 'text'"
+                  :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
+                  name="password"
+                  label="Password"
+                  id="password"
+                  :rules="[rules.required]"
+                  v-model="password"
+                  :error="error"
+                  @click:append="hidePassword = !hidePassword"/>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <a @click="showRegisterFunction">Need a CryptoBoard account? <br/>Sign up</a>
+              <v-spacer></v-spacer>
+              <v-btn block dark class="btnLogin" color="#c700ff" @click="login" :loading="loading">Login</v-btn>
+            </v-card-actions>
+          </v-card>
         </v-layout>
       </v-container>
       <v-snackbar
@@ -105,16 +105,24 @@
             </v-card-text>
             <v-card-actions>
               <v-btn style="border-radius: 20px;" class="ma-2" color="#F0F0F0" @click="backToLogin">
-                <v-icon left>mdi-arrow-left</v-icon>Back
+                <v-icon left>mdi-arrow-left</v-icon>
+                Back
               </v-btn>
 
               <v-spacer></v-spacer>
-              <v-btn block dark center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register</v-btn>
+              <v-btn block dark center class="btnLogin" color="#c700ff" @click="register" :loading="loading">Register
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-layout>
       </v-container>
     </div>
+      <div class="footer">
+        <a href="https://es.linkedin.com/in/carlos-marti-chafer-055659179" target="_blank" style="text-decoration:none;margin-bottom: 4px; color:white;">
+           <v-icon style="color: white;">mdi-linkedin</v-icon>
+          <span>Powered By Carlos Martí</span>
+        </a>
+      </div>
   </v-app>
 </template>
 
@@ -160,7 +168,7 @@ export default {
 
       try {
         const res = await UserLogin.login(this.email, this.password);
-        sessionStorage.setItem('token',res.data.token)
+        sessionStorage.setItem('token', res.data.token)
         this.$router.push("/dashboard")
         this.$notification.dark("Welcome Back!", {timer: 3});
       } catch (error) {
@@ -169,7 +177,7 @@ export default {
         vm.showResult = true;
       }
     },
-    showRegisterFunction(){
+    showRegisterFunction() {
       this.showRegister = true;
       // this.$router.push("/register")
     },
@@ -184,7 +192,7 @@ export default {
         return;
       }
 
-      if (vm.registerPassword !== vm.confirmPassword){
+      if (vm.registerPassword !== vm.confirmPassword) {
 
         vm.result = "Passwords don't match";
         vm.showResult = true;
@@ -193,18 +201,18 @@ export default {
       }
 
       try {
-        const register = await UserRegister.register(this.firstName,this.lastName,this.registerEmail, this.registerPassword);
+        const register = await UserRegister.register(this.firstName, this.lastName, this.registerEmail, this.registerPassword);
         const res = await UserLogin.login(this.registerEmail, this.registerPassword);
-        sessionStorage.setItem('token',res.data.token)
+        sessionStorage.setItem('token', res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome "+ this.firstName +" To CryptoBoard!", {timer: 3});
+        this.$notification.dark("Welcome " + this.firstName + " To CryptoBoard!", {timer: 3});
       } catch (error) {
         vm.error = true;
         vm.result = "Register Error.";
         vm.showResult = true;
       }
     },
-    backToLogin(){
+    backToLogin() {
       // this.$router.push("/")
       this.showRegister = false;
     }
@@ -213,36 +221,45 @@ export default {
 </script>
 
 <style scoped lang="css">
-  /*#login {*/
-  /*  height: 100%;*/
-  /*  width: 100%;*/
-  /*  position: absolute;*/
-  /*  top: 0;*/
-  /*  left: 0;*/
-  /*  content: "";*/
-  /*  z-index: 0;*/
-  /*}*/
+/*#login {*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  content: "";*/
+/*  z-index: 0;*/
+/*}*/
 
-  .border-card{
-    border-radius: 5%;
-    background-color: #F0F0F0;
-  }
+.border-card {
+  border-radius: 5%;
+  background-color: #F0F0F0;
+}
 
-  .btnLogin{
-    color: #F0F0F0;
-    font-weight: bold;
-    border-radius: 20px;
-  }
+.btnLogin {
+  color: #F0F0F0;
+  font-weight: bold;
+  border-radius: 20px;
+}
 
-  .centered-text {
-    position: absolute;
-    margin-top: 2%;
-    width: 100%;
-  }
+.centered-text {
+  position: absolute;
+  margin-top: 2%;
+  width: 100%;
+}
 
-  .centered-text-register {
-    position: absolute;
-    margin-top: 2%;
-    width: 100%;
-  }
+.centered-text-register {
+  position: absolute;
+  margin-top: 2%;
+  width: 100%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
 </style>
