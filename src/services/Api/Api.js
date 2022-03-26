@@ -4,12 +4,12 @@ const CORE_CONTEXT_PATH = "/api/core/v1";
 const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
 
 const axiosAPI = axios.create({
-  baseURL : "https://api.cryptoboard.es"
+  baseURL : "http://localhost:8029"
 });
 
 const apiRequest = (method, url, request) => {
   const headers = {
-    authorization: "Bearer " + sessionStorage.getItem('token')
+    authconnect: "Bearer " + sessionStorage.getItem('token')
   };
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
