@@ -4,7 +4,7 @@ const CORE_CONTEXT_PATH = "/api/core/v1";
 const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
 
 const axiosAPI = axios.create({
-  baseURL : "http://localhost:8029"
+  baseURL : "https://api.cryptoboard.es"
 });
 
 const apiRequest = (method, url, request) => {
