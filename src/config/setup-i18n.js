@@ -6,6 +6,8 @@ export function setupAndGetI18n(Vue, isProduction) {
     const i18n = new VueI18n({
         locale: 'en',
         fallbackLocale: 'en',
+        fallbackWarn: false,
+        missingWarn: false,
         fallbackRoot: false,
         silentTranslationWarn: true,
 
