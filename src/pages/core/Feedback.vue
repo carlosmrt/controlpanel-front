@@ -5,7 +5,7 @@
       Back
     </v-btn>
     <v-spacer></v-spacer>
-    <v-container style="width: 65%;">
+    <v-container style="width: 70%;">
       <v-form class="mt-3">
         <v-rating
           v-model="rate"
