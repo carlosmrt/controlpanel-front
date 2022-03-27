@@ -5,13 +5,12 @@
       Back
     </v-btn>
     <v-spacer></v-spacer>
-    <v-container style="width: 60%;">
+    <v-container style="width: 65%;">
       <v-form class="mt-3">
         <v-rating
           v-model="rate"
           background-color="purple lighten-3"
           color="purple"
-          large
         ></v-rating>
         <v-text-field
           label="Subject"
