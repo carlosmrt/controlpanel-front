@@ -2,7 +2,7 @@
   <v-toolbar
     dark
     app
-    color="#C2C2C2"
+    color="#1D2330"
     class="toolbar">
     <router-link :to="{ name: 'Dashboard' }">
       <img src="static/logo_small.png" width="50%" class="icon-image"/>
