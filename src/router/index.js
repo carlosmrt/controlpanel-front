@@ -6,6 +6,7 @@ import Login from '../pages/core/Login.vue';
 import Error from '../pages/core/Error.vue';
 import Register from "../pages/core/Register";
 import Profile from "../pages/core/Profile";
+import Feedback from "../pages/core/Feedback";
 
 
 
@@ -20,6 +21,16 @@ export default new Router({
       meta: {
         breadcrumb: [
           { name: 'dashboard' }
+        ]
+      }
+    },
+    {
+      path: '/feedback',
+      name: 'Feedback',
+      component: Feedback,
+      meta: {
+        breadcrumb: [
+          { name: 'feedback' }
         ]
       }
     },

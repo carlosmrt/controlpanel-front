@@ -55,6 +55,14 @@ export default {
           }
         },
         {
+          icon: 'feedback',
+          href: '#',
+          title: 'Feedback',
+          click: () => {
+            this.$router.push({name: 'Feedback'});
+          }
+        },
+        {
           icon: 'power_settings_new',
           href: '#',
           title: 'Logout',
