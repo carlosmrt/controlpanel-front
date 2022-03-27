@@ -2,7 +2,7 @@ import axios from "axios";
 
 const CORE_CONTEXT_PATH = "/api/core/v1";
 const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
-const URL = 'https://api.cryptoboard.es'
+const URL = process.env.API_URL
 
 const axiosAPI = axios.create({
   baseURL : URL
