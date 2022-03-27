@@ -66,8 +66,8 @@ new Vue({
   },
 
   created() {
-    const vm = this;
-
-    vm.setLanguage('es');
+    // const vm = this;
+    //
+    // vm.setLanguage('es');
   },
 })

@@ -53,7 +53,6 @@ export default {
           if(this.tab === null){
             this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
           }
-          console.log(this.tab);
         },
         () => {
           this.$notification.error("Internal Error", {timer: 3});
