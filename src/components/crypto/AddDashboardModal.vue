@@ -57,6 +57,8 @@ export default {
     submit() {
       AddDashboard.addDashboard(this.name,this.selectedFiatCoin).then(() => {
         this.$emit("dashboardAdded");
+        this.name = null;
+        this.selectedFiatCoin = null;
         this.dashboardDialog = false;
       })
     },

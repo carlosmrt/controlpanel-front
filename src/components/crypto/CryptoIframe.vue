@@ -55,24 +55,6 @@ export default {
     padding: 0;
     margin: 0;
     width: 100%;
-  }
-
-  .toolbar .text {
-    padding-left: 15px;
-    color: white;
-    text-decoration:none;
-  }
-
-  .item-title {
-    font-size: 17px;
-    font-weight: 500;
-  }
-  .item-sub-title {
-    font-size: 15px;
-    font-weight: 500;
-  }
-
-  .active {
-    font-weight: bold;
+    pointer-events: none !important;
   }
 </style>
