@@ -1,4 +1,6 @@
 import axios from "axios";
+import Vue from "vue";
+import App from "../../App";
 
 const CORE_CONTEXT_PATH = "/api/core/v1";
 const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
@@ -23,6 +25,9 @@ const apiRequest = (method, url, request) => {
     return Promise.resolve(res.data);
   })
     .catch(err => {
+      // if(err.response.status === 422) {
+      //
+      // }
       return Promise.reject(err);
     });
 };

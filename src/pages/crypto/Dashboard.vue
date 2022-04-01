@@ -7,16 +7,14 @@
       </v-tabs>
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
-
-    <div style="float: right;display: block;width: 140px;">
+    <v-container width="10%"  fixed class="align-right fixed" style="margin-left: 5%">
     <DropDownSettings
       :dashboardId='tab'
       @dashboardDeleted="getDashboards('dashboardDeleted')"
       @coinAdded="getDashboards('coinAdded')"/>
-    </div>
+    </v-container>
 
-    <v-container flex items-center justify-center>
-
+    <v-container flex items-center>
     <v-layout v-show="tab === dashboard.id" row wrap v-for="(dashboard, index) in dashboards" :key="index">
       <CryptoIframe class="cryptoIframe" v-for="(item, index) in dashboard.coins" :iframe="item" :key="index"/>
       <div v-if="!dashboard.coins.length">Data Not Found</div>
@@ -69,5 +67,10 @@ export default {
   .cryptoIframe{
     margin-right: 2%;
     margin-bottom: 2%;
+  }
+
+  .align-right {
+    text-align: right;
+    border: 0;
   }
 </style>

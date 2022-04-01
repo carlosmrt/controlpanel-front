@@ -3,9 +3,10 @@
     <v-menu offset-y>
       <template slot="activator">
         <v-btn
-          style="border-radius: 20px;"
+          right
           color="purple"
           dark
+          class="roundBorder"
         >
           <v-icon dark>menu</v-icon>
 
@@ -45,7 +46,7 @@
       @dashboardDeleted="updateDashboardsPage('dashboardDeleted')"
       @deleteDashboardModalClosed="updateShowDeleteDashboardModal()"
     />
-  </div>
+  </div class="text-center">
 </template>
 
 <script>
