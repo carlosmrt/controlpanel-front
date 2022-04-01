@@ -4,15 +4,14 @@
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
     <v-spacer></v-spacer>
-      <v-container style="width: 60%;">
+
+    <v-container class="mb-5" style="width: 60%;">
+      <v-container flex items-center width="100%">
         <v-avatar color="#F8F5F5" size="100px">
           <a style="color: #8A4086;font-size: 24px;">{{getInitials()}}</a>
         </v-avatar>
+        <span style="color: black;font-size: 18px;margin-left: 10px">{{user.firstName}} {{user.lastName}}</span>
       </v-container>
-    <v-container style="width: 60%;">
-      <span style="color: black;font-size: 18px;">{{user.firstName}} {{user.lastName}}</span>
-    </v-container>
-    <v-container class="mb-5" style="width: 60%;">
       <v-form class="mt-3" >
         <v-text-field
           append-icon="person"
