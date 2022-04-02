@@ -141,7 +141,7 @@ export default {
       }
 
       UpdateUser.update(this.user.firstName, this.user.lastName, this.user.email, this.password, this.newPassword).then((response) => {
-        this.$notification.dark("User Updated Successfully!", {timer: 3});
+        this.$notification.dark("User updated successfully", {timer: 3});
         this.$root.$emit('userUpdated');
       }, (error) => {
         if (error.response.status === 422) {
