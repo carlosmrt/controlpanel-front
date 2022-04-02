@@ -6,7 +6,7 @@
     </v-btn>
     <v-card class="roundBorder">
       <v-card-title>
-        <h2>Create CryptoBoard</h2>
+        <h2>Create Board</h2>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3">
