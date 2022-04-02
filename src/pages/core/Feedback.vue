@@ -53,7 +53,7 @@ export default {
     },
     async sendFeedback() {
       await SendFeedback.send(this.rate, this.subject, this.body);
-      this.$notification.dark("Thank you for your feedback.", {timer: 3});
+      this.$notification.dark("Thanks for your feedback.", {timer: 3});
       this.rate = 3;
       this.subject = null;
       this.body = null;

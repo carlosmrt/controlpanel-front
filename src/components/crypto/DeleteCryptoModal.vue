@@ -48,12 +48,23 @@ export default {
       DeleteCoin.deleteCoin(this.selectedCoin).then(() => {
         this.$emit("coinDeleted");
         this.coinDialog = false;
+      }, (error) => {
+        if(error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
       })
     },
     getCoins() {
       DashboardCoinsList.list(this.dashboardId).then((response) => {
           this.coins = response.data;
-        });
+        }, (error) => {
+          if(error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
+          this.coinDialog = false;
+        }
+      );
     },
   },
   watch: {

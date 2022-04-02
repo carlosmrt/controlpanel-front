@@ -48,15 +48,24 @@ export default {
           this.$emit("coinAdded");
           this.coinDialog = false;
         },
-        (e) => {
-          this.$notification.error("Limit Reached", {timer: 3});
+        (error) => {
+          if(error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
           this.coinDialog = false;
         })
     },
     getCoins() {
       CoinsList.list().then((response) => {
           this.coins = response.data;
-        });
+        },
+        (error) => {
+          if(error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
+          this.coinDialog = false;
+        }
+      );
     },
   },
   mounted() {

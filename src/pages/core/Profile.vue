@@ -1,18 +1,19 @@
 <template>
   <v-container>
-    <v-btn style="border-radius: 20px;"  color="#F0F0F0" @click="backToCryptoBoards">
-      <v-icon left>mdi-arrow-left</v-icon>Back
+    <v-btn style="border-radius: 20px;" color="#F0F0F0" @click="backToCryptoBoards">
+      <v-icon left>mdi-arrow-left</v-icon>
+      Back
     </v-btn>
     <v-spacer></v-spacer>
 
     <v-container class="mb-5" style="width: 60%;">
       <v-container flex items-center width="100%">
         <v-avatar color="#F8F5F5" size="100px">
-          <a style="color: #8A4086;font-size: 24px;">{{getInitials()}}</a>
+          <a style="color: #8A4086;font-size: 24px;">{{ getInitials() }}</a>
         </v-avatar>
-        <span style="color: black;font-size: 18px;margin-left: 10px">{{user.firstName}} {{user.lastName}}</span>
+        <span style="color: black;font-size: 18px;margin-left: 10px">{{ user.firstName }} {{ user.lastName }}</span>
       </v-container>
-      <v-form class="mt-3" >
+      <v-form class="mt-3">
         <v-text-field
           append-icon="person"
           name="firstName"
@@ -63,7 +64,9 @@
           :error="error"
           @click:append="hideConfirmNewPassword = !hideConfirmNewPassword"/>
       </v-form>
-      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="#c700ff" @click="updateUser" dark :loading="loading">Save</v-btn>
+      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="#c700ff"
+             @click="updateUser" dark :loading="loading">Save
+      </v-btn>
     </v-container>
 
   </v-container>
@@ -71,14 +74,15 @@
 <script>
 import UserMe from "../../services/Api/CoreContext/User/UserMe";
 import UpdateUser from "../../services/Api/CoreContext/User/UpdateUser";
+import DashboardRetrieve from "../../services/Api/CryptoContext/Dashboard/DashboardRetrieve";
 
 export default {
   data() {
-    return{
+    return {
       user: {
-        firstName : '',
-        lastName : '',
-        email : '',
+        firstName: '',
+        lastName: '',
+        email: '',
       },
       loading: false,
       password: null,
@@ -101,11 +105,11 @@ export default {
         this.user = response.data;
       })
     },
-    getInitials(){
+    getInitials() {
       const name = this.user.firstName + ' ' + this.user.lastName;
       let initials = name.split(' ');
 
-      if(initials.length > 1) {
+      if (initials.length > 1) {
         initials = initials.shift().charAt(0) + initials.shift().charAt(0);
       } else {
         initials = name.substring(0, 2);
@@ -113,7 +117,7 @@ export default {
 
       return initials.toUpperCase();
     },
-    backToCryptoBoards(){
+    backToCryptoBoards() {
       this.$router.push("/dashboard")
     },
     async updateUser() {
@@ -121,30 +125,30 @@ export default {
 
       if (!this.user.email || !this.user.firstName || !this.user.lastName) {
 
-        vm.result = "Email and Password can't be null.";
+        this.$notification.error("Data can't be null", {timer: 3});
+
         vm.showResult = true;
 
         return;
       }
 
-      if (vm.newPassword !== vm.confirmNewPassword){
+      if (vm.newPassword !== vm.confirmNewPassword) {
 
-        vm.result = "Passwords don't match";
+        this.$notification.error("Passwords don't match", {timer: 3});
         vm.showResult = true;
 
         return;
       }
 
-      try{
-        await UpdateUser.update(this.user.firstName,this.user.lastName,this.user.email, this.password, this.newPassword);
-      }catch (error){
-        vm.error = true;
-        vm.result = "Update Error.";
-        vm.showResult = true;
-      }
-
-      this.$notification.dark("User Updated Successfully!", {timer: 3});
-      this.$root.$emit('userUpdated');
+      UpdateUser.update(this.user.firstName, this.user.lastName, this.user.email, this.password, this.newPassword).then((response) => {
+        this.$notification.dark("User Updated Successfully!", {timer: 3});
+        this.$root.$emit('userUpdated');
+      }, (error) => {
+        if (error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
+      })
     },
   },
   mounted() {

@@ -38,11 +38,21 @@ export default {
       DeleteDashboard.deleteDashboard(this.dashboardId).then(() => {
         this.$emit("dashboardDeleted");
         this.deleteDashboardDialog = false;
+      }, (error) => {
+        if(error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
       })
     },
     getDashboard(){
       DashboardRetrieve.retrieve(this.dashboardId).then((response) => {
         this.name = response.data.name;
+      }, (error) => {
+        if(error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
       })
     },
   },

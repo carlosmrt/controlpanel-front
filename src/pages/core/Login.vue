@@ -129,6 +129,7 @@
 <script>
 import UserLogin from "../../services/Api/CoreContext/User/UserLogin";
 import UserRegister from "../../services/Api/CoreContext/User/UserRegister";
+import VueNotification from "@kugatsu/vuenotification";
 
 export default {
   data() {
@@ -170,33 +171,30 @@ export default {
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token', res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome Back!", {timer: 3});
+        this.$notification.dark("Welcome back", {timer: 3});
       } catch (error) {
+        if(error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
         vm.error = true;
-        vm.result = "Email or Password is incorrect.";
-        vm.showResult = true;
       }
     },
     showRegisterFunction() {
+      this.error = false;
       this.showRegister = true;
-      // this.$router.push("/register")
     },
     async register() {
       const vm = this;
 
       if (!vm.registerEmail || !vm.registerPassword || !vm.firstName || !vm.lastName || !vm.confirmPassword) {
 
-        vm.result = "Email and Password can't be null.";
-        vm.showResult = true;
-
+        this.$notification.error("Data can't be null", {timer: 3});
         return;
       }
 
       if (vm.registerPassword !== vm.confirmPassword) {
 
-        vm.result = "Passwords don't match";
-        vm.showResult = true;
-
+        this.$notification.error("Passwords don't match", {timer: 3});
         return;
       }
 
@@ -205,37 +203,28 @@ export default {
         const res = await UserLogin.login(this.registerEmail, this.registerPassword);
         sessionStorage.setItem('token', res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome " + this.firstName + " To CryptoBoard!", {timer: 3});
+        this.$notification.dark("Welcome " + this.firstName + " to CryptoBoard", {timer: 3});
       } catch (error) {
+        if(error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
         vm.error = true;
-        vm.result = "Register Error.";
-        vm.showResult = true;
       }
     },
     backToLogin() {
-      // this.$router.push("/")
+      this.error = false;
       this.showRegister = false;
+    }
+  },
+  created() {
+    if(sessionStorage.getItem('token')){
+      this.$router.push("/dashboard")
     }
   }
 }
 </script>
 
 <style scoped lang="css">
-/*#login {*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  content: "";*/
-/*  z-index: 0;*/
-/*}*/
-
-.border-card {
-  border-radius: 5%;
-  background-color: #F0F0F0;
-}
-
 .btnLogin {
   color: #F0F0F0;
   font-weight: bold;

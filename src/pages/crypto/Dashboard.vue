@@ -52,8 +52,10 @@ export default {
             this.tab = this.dashboards.length > -1 ?  this.dashboards[0].id : null;
           }
         },
-        () => {
-          this.$notification.error("Internal Error", {timer: 3});
+        (error) => {
+          if(error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
         });
     }
   },

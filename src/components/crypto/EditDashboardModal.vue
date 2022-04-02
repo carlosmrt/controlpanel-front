@@ -1,9 +1,9 @@
 <template>
- <v-dialog v-model="editDashboardDialog" max-width="500px">
-   <v-card class="roundBorder">
-     <v-card-title>
-       <h2>Edit CryptoBoard</h2>
-     </v-card-title>
+  <v-dialog v-model="editDashboardDialog" max-width="500px">
+    <v-card class="roundBorder">
+      <v-card-title>
+        <h2>Edit CryptoBoard</h2>
+      </v-card-title>
       <v-card-text>
         <v-form class="px-3">
           <v-text-field
@@ -24,8 +24,8 @@
           </div>
         </v-form>
       </v-card-text>
-   </v-card>
- </v-dialog>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -62,12 +62,22 @@ export default {
       UpdateDashboard.updateDashboard(this.dashboardId, this.name, this.selectedFiatCoin).then(() => {
         this.$emit("dashboardUpdated");
         this.editDashboardDialog = false;
+      }, (error) => {
+        if (error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
       })
     },
-    getDashboard(){
+    getDashboard() {
       DashboardRetrieve.retrieve(this.dashboardId).then((response) => {
         this.name = response.data.name;
         this.selectedFiatCoin = response.data.fiatCoinId;
+      }, (error) => {
+        if (error.response.status === 422) {
+          this.$notification.error(error.response.data.error.message, {timer: 3});
+        }
+        this.coinDialog = false;
       })
     }
   },
@@ -76,8 +86,8 @@ export default {
       this.editDashboardDialog = value;
       this.getDashboard();
     },
-    editDashboardDialog: function (value){
-      if(!value){
+    editDashboardDialog: function (value) {
+      if (!value) {
         this.$emit('editDashboardModalClosed');
       }
     }
