@@ -71,11 +71,11 @@ export default {
         id: 'deleteCrypto'
       },
       {
-        title: 'Edit CryptoBoard',
+        title: 'Edit Board',
         id: 'editDashboard'
       },
       {
-        title: 'Delete CryptoBoard',
+        title: 'Delete Board',
         id: 'deleteDashboard'
       }
     ],

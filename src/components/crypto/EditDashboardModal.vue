@@ -2,7 +2,7 @@
   <v-dialog v-model="editDashboardDialog" max-width="500px">
     <v-card class="roundBorder">
       <v-card-title>
-        <h2>Edit CryptoBoard</h2>
+        <h2>Edit Board</h2>
       </v-card-title>
       <v-card-text>
         <v-form class="px-3">

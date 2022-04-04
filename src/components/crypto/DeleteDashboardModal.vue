@@ -2,10 +2,10 @@
  <v-dialog v-model="deleteDashboardDialog" max-width="500px">
    <v-card class="roundBorder">
      <v-card-title>
-       <h2>Delete CryptoBoard</h2>
+       <h2>Delete Board</h2>
      </v-card-title>
       <v-card-text>
-        <p>Are you sure you want to delete {{name}}?</p>
+        <p>Are you sure you want to delete "{{name}}"?</p>
           <div class="float">
             <v-btn style="border-radius: 20px;" class="mx-0 mt-3" color="purple" dark @click="submit();">Delete</v-btn>
           </div>
