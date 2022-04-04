@@ -46,14 +46,15 @@ export default {
     submit() {
         AddCoinToDashboard.addCoin(this.dashboardId, this.selectedCoin).then(() => {
           this.$emit("coinAdded");
-          this.coinDialog = false;
         },
         (error) => {
           if(error.response.status === 422) {
             this.$notification.error(error.response.data.error.message, {timer: 3});
           }
-          this.coinDialog = false;
         })
+
+      this.selectedCoin = null;
+      this.coinDialog = false;
     },
     getCoins() {
       CoinsList.list().then((response) => {
