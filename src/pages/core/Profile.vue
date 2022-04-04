@@ -64,7 +64,7 @@
           :error="error"
           @click:append="hideConfirmNewPassword = !hideConfirmNewPassword"/>
       </v-form>
-      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="#c700ff"
+      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="purple"
              @click="updateUser" dark :loading="loading">Save
       </v-btn>
     </v-container>

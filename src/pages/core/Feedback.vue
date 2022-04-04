@@ -24,7 +24,7 @@
           v-model="body"
           :error="error"/>
       </v-form>
-      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="#c700ff"
+      <v-btn style="width:20%;float: right; border-radius: 20px;" block center class="btnLogin" color="purple"
              @click="sendFeedback()" dark :loading="loading">Send
       </v-btn>
     </v-container>
