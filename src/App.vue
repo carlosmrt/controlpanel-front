@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  //TODO: IF Token to dashboards if not to login
   name: 'App',
   data() {
     return {

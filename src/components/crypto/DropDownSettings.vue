@@ -1,12 +1,12 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" style="width: 100%">
     <v-menu offset-y>
       <template slot="activator">
         <v-btn
           right
           color="purple"
           dark
-          class="roundBorder"
+          class="roundBorder px-6"
         >
           <v-icon dark>menu</v-icon>
 
@@ -46,7 +46,7 @@
       @dashboardDeleted="updateDashboardsPage('dashboardDeleted')"
       @deleteDashboardModalClosed="updateShowDeleteDashboardModal()"
     />
-  </div class="text-center">
+  </div>
 </template>
 
 <script>
