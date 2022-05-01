@@ -6,6 +6,7 @@
     </v-btn>
     <v-spacer></v-spacer>
     <v-container style="width: 70%;">
+      <h5>Your comments about any aspect of this site are welcome. Please send us your feedback.</h5>
       <v-form class="mt-3">
         <v-rating
           v-model="rate"
