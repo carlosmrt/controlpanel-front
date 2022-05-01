@@ -1,10 +1,12 @@
 <template>
-  <v-container fluid >
+  <v-container fluid>
     <v-layout>
+      <v-layout  style="width: 80%">
+        <v-tabs slider-color="purple"  style="width: 100%" max-width="80%">
+          <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
+        </v-tabs>
+      </v-layout>
 
-      <v-tabs  style="width: 100%" slider-color="purple">
-        <v-tab @click="tab = item.id" v-for="(item, index) in dashboards" :key="index">{{item.name}}</v-tab>
-      </v-tabs>
       <AddDashboardModal @dashboardAdded="getDashboards('dashboardAdded')"></AddDashboardModal>
     </v-layout>
     <v-layout width="100%" align-right>

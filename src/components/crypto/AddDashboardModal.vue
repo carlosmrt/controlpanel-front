@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dashboardDialog" max-width="500px">
-    <v-btn class="right roundBorder" slot="activator" dark color="purple">
+    <v-btn class=" roundBorder" slot="activator" dark color="purple">
       <v-icon dark>mdi-plus</v-icon>
-      <span>Board</span>
+      Board
     </v-btn>
     <v-card class="roundBorder">
       <v-card-title>
