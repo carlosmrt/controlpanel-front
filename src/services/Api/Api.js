@@ -6,7 +6,7 @@ const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
 const URL = process.env.API_URL
 
 const axiosAPI = axios.create({
-  baseURL : URL
+  baseURL: URL
 });
 
 const apiRequest = (method, url, request) => {
@@ -24,21 +24,24 @@ const apiRequest = (method, url, request) => {
     return Promise.resolve(res.data);
   })
     .catch(err => {
+      if (error.response.status === 500) {
+          sessionStorage.removeItem('token');
+      }
       return Promise.reject(err);
     });
 };
 
-const get = (url, request) => apiRequest("get",url,request);
+const get = (url, request) => apiRequest("get", url, request);
 
-const deleteRequest = (url, request) =>  apiRequest("delete", url, request);
+const deleteRequest = (url, request) => apiRequest("delete", url, request);
 
 const post = (url, request) => apiRequest("post", url, request);
 
 const put = (url, request) => apiRequest("put", url, request);
 
-const patch = (url, request) =>  apiRequest("patch", url, request);
+const patch = (url, request) => apiRequest("patch", url, request);
 
-const API ={
+const API = {
   get,
   delete: deleteRequest,
   post,
@@ -47,7 +50,7 @@ const API ={
 };
 
 export default {
-  METHODS : API,
-  CORE_CONTEXT_PATH : CORE_CONTEXT_PATH,
-  CRYPTO_CONTEXT_PATH : CRYPTO_CONTEXT_PATH
+  METHODS: API,
+  CORE_CONTEXT_PATH: CORE_CONTEXT_PATH,
+  CRYPTO_CONTEXT_PATH: CRYPTO_CONTEXT_PATH
 };

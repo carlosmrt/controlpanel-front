@@ -67,7 +67,7 @@ export default {
           href: '#',
           title: 'Logout',
           click: () => {
-            sessionStorage.setItem('token','')
+            sessionStorage.removeItem('token');
             this.$router.push({name: 'Login'});
           }
         }
@@ -83,15 +83,16 @@ export default {
       UserMe.me().then((response) => {
           this.user = response.data;
         },
-        () => {
-          this.$router.push("/");
+        (error) => {
+          sessionStorage.removeItem('token');
+          this.$router.push({name: 'Login'});
         });
     },
-    getInitials(){
+    getInitials() {
       const name = this.user.firstName + ' ' + this.user.lastName;
       let initials = name.split(' ');
 
-      if(initials.length > 1) {
+      if (initials.length > 1) {
         initials = initials.shift().charAt(0) + initials.shift().charAt(0);
       } else {
         initials = name.substring(0, 2);
@@ -100,7 +101,7 @@ export default {
       return initials.toUpperCase();
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.getUser()
     this.$root.$on('userUpdated', () => {
       this.getUser()
@@ -121,10 +122,10 @@ export default {
 .toolbar .text {
   padding-left: 15px;
   color: white;
-  text-decoration:none;
+  text-decoration: none;
 }
 
-.icon-image{
+.icon-image {
   margin-top: 3%;
 }
 </style>
