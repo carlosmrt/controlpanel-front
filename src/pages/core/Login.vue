@@ -171,7 +171,6 @@ export default {
         const res = await UserLogin.login(this.email, this.password);
         sessionStorage.setItem('token', res.data.token)
         this.$router.push("/dashboard")
-        this.$notification.dark("Welcome back", {timer: 3});
       } catch (error) {
         if(error.response.status === 422) {
           this.$notification.error(error.response.data.error.message, {timer: 3});
