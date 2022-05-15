@@ -7,7 +7,7 @@ import Error from '../pages/core/Error.vue';
 import Register from "../pages/core/Register";
 import Profile from "../pages/core/Profile";
 import Feedback from "../pages/core/Feedback";
-
+import Alerts from "../pages/crypto/Alerts";
 
 
 Vue.use(Router);
@@ -20,7 +20,7 @@ export default new Router({
       component: Dashboard,
       meta: {
         breadcrumb: [
-          { name: 'dashboard' }
+          {name: 'dashboard'}
         ]
       }
     },
@@ -30,7 +30,7 @@ export default new Router({
       component: Feedback,
       meta: {
         breadcrumb: [
-          { name: 'feedback' }
+          {name: 'feedback'}
         ]
       }
     },
@@ -40,7 +40,7 @@ export default new Router({
       component: Profile,
       meta: {
         breadcrumb: [
-          { name: 'profile' }
+          {name: 'profile'}
         ]
       }
     },
@@ -66,6 +66,16 @@ export default new Router({
       component: Register,
       meta: {
         allowAnonymous: true
+      }
+    },
+    {
+      path: '/alerts',
+      name: 'Alerts',
+      component: Alerts,
+      meta: {
+        breadcrumb: [
+          {name: 'Alerts'}
+        ]
       }
     },
   ]

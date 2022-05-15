@@ -40,7 +40,6 @@
 <script>
 
 import UserMe from "../../services/Api/CoreContext/User/UserMe";
-
 export default {
   data() {
     return {
@@ -52,6 +51,22 @@ export default {
           title: 'Profile',
           click: () => {
             this.$router.push({name: 'Profile'});
+          }
+        },
+        {
+          icon: 'poll',
+          href: '#',
+          title: 'Boards',
+          click: () => {
+            this.$router.push({name: 'Dashboard'});
+          }
+        },
+        {
+          icon: 'warning',
+          href: '#',
+          title: 'Alerts',
+          click: () => {
+            this.$router.push({name: 'Alerts'});
           }
         },
         {
