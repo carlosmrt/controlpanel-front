@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <v-btn style="border-radius: 20px;" color="#F0F0F0" @click="backToCryptoBoards">
-      <v-icon left>mdi-arrow-left</v-icon>
-      Back
-    </v-btn>
+<!--    <v-btn style="border-radius: 20px;" color="#F0F0F0" @click="backToCryptoBoards">-->
+<!--      <v-icon left>mdi-arrow-left</v-icon>-->
+<!--      Back-->
+<!--    </v-btn>-->
     <v-spacer></v-spacer>
 
     <v-container class="mb-5" style="width: 60%;">

@@ -1,79 +1,110 @@
 <template>
-  <v-simple-table
-    fixed-header
-    height="300px"
-  >
-    <template v-slot:default>
-      <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-        style="border: 1px;"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+  <v-layout row>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card-title>
+        <h3>Alerts</h3>
+        <v-btn class="roundBorder" dark color="purple">
+          <v-icon dark>mdi-plus</v-icon>
+        </v-btn>
+      </v-card-title>
+      <v-card>
+        <v-list
+          subheader
+          three-line
+        >
+          <v-layout column fill-height v-for="(alert, index) in alerts">
+            <v-list-tile>
+              <v-card-title>{{ alert.coin.name }}</v-card-title>
+              <v-list-tile-content>
+                <v-list-tile-sub-title>Min. Price: {{ alert.minPrice }}{{getFiatCoinSymbol(alert.fiatCoinId)}}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>Max. Price: {{ alert.maxPrice }}{{getFiatCoinSymbol(alert.fiatCoinId)}}</v-list-tile-sub-title>
+              </v-list-tile-content>
+              <v-list-tile-action>
+                <v-menu class="toolbar-menu-item" offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
+                  <v-btn icon large flat slot="activator" :ripple="false">
+                  <v-icon>more_vert</v-icon>
+                  </v-btn>
+                  <v-list>
+                    <v-list-tile
+                      v-for="(item,index) in items"
+                      :key="index"
+                      :to="!item.href ? { name: item.name } : null"
+                      ripple="ripple"
+                      :disabled="item.disabled"
+                      :target="item.target"
+                      @click="item.click">
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-layout>
+        </v-list>
+      </v-card>
+    </v-flex>
+  </v-layout>
+
 </template>
+
 <script>
+import ListAlerts from "../../services/Api/CryptoContext/Alerts/ListAlerts";
+
 export default {
-  data () {
+  data() {
     return {
-      desserts: [
+      alerts: [],
+      items: [
         {
-          name: 'Frozen Yogurt',
-          calories: 159,
+          href: '#',
+          title: 'Edit',
+          click: () => {
+            this.$router.push({name: 'Profile'});
+          }
         },
         {
-          name: 'Ice cream sandwich',
-          calories: 237,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-        },
+          href: '#',
+          title: 'Delete',
+          click: () => {
+            this.$router.push({name: 'Dashboard'});
+          }
+        }
       ],
+      fiatCoins: [
+        {
+          id: '1505',
+          name: '$'
+        },
+        {
+          id: '1506',
+          name: '€'
+        }
+      ]
+    }
+
+  },
+  methods: {
+    getAlerts() {
+      ListAlerts.list().then((response) => {
+          this.alerts = response.data;
+        },
+        (error) => {
+          if (error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
+          sessionStorage.removeItem('token');
+          this.$router.push({name: 'Login'});
+        });
+    },
+    getFiatCoinSymbol(fiatCoinId){
+      const fiatCoin = this.fiatCoins.find(fiatCoin => fiatCoin.id === fiatCoinId);
+      return fiatCoin.name;
     }
   },
+  mounted() {
+    this.getAlerts()
+  }
 }
 </script>

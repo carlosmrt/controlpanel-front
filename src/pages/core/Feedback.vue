@@ -1,9 +1,5 @@
 <template>
   <v-container>
-    <v-btn style="border-radius: 20px;" color="#F0F0F0" @click="backToCryptoBoards">
-      <v-icon left>mdi-arrow-left</v-icon>
-      Back
-    </v-btn>
     <v-spacer></v-spacer>
     <v-container style="width: 70%;">
       <h5>Your comments about any aspect of this site are welcome. Please send us your feedback.</h5>
@@ -59,9 +55,6 @@ export default {
       this.subject = null;
       this.body = null;
     },
-  },
-  mounted() {
-    this.getUser()
   }
 }
 </script>
