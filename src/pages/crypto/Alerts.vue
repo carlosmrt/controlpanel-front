@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card-title>
         <h3>Alerts</h3>
-        <v-btn class="roundBorder" dark color="purple">
+        <v-btn class="roundBorder" dark color="purple" @click="openAlertModal()">
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>
@@ -12,17 +12,22 @@
           subheader
           three-line
         >
-          <v-layout column fill-height v-for="(alert, index) in alerts">
+          <v-layout column fill-height v-for="(alert, index) in alerts" :key="alert.id">
             <v-list-tile>
               <v-card-title>{{ alert.coin.name }}</v-card-title>
               <v-list-tile-content>
-                <v-list-tile-sub-title>Min. Price: {{ alert.minPrice }}{{getFiatCoinSymbol(alert.fiatCoinId)}}</v-list-tile-sub-title>
-                <v-list-tile-sub-title>Max. Price: {{ alert.maxPrice }}{{getFiatCoinSymbol(alert.fiatCoinId)}}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>Min. Price: {{ alert.minPrice }}
+                  {{getFiatCoinSymbol(alert.fiatCoinId) }}
+                </v-list-tile-sub-title>
+                <v-list-tile-sub-title>Max. Price: {{ alert.maxPrice }}
+                  {{getFiatCoinSymbol(alert.fiatCoinId) }}
+                </v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-menu class="toolbar-menu-item" offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
+                <v-menu class="toolbar-menu-item" offset-y origin="center center" :nudge-bottom="10"
+                        transition="scale-transition">
                   <v-btn icon large flat slot="activator" :ripple="false">
-                  <v-icon>more_vert</v-icon>
+                    <v-icon>more_vert</v-icon>
                   </v-btn>
                   <v-list>
                     <v-list-tile
@@ -45,14 +50,21 @@
         </v-list>
       </v-card>
     </v-flex>
+    <AddCryptoAlert
+      :show="showAddAlertModal"
+      @alertAdded="getAlerts()"
+      @addCryptoAlertClosed="updateAlertsModal()"
+    />
   </v-layout>
 
 </template>
 
 <script>
 import ListAlerts from "../../services/Api/CryptoContext/Alerts/ListAlerts";
+import AddCryptoAlert from "../../components/crypto/AddCryptoAlert";
 
 export default {
+  components: {AddCryptoAlert},
   data() {
     return {
       alerts: [],
@@ -81,9 +93,9 @@ export default {
           id: '1506',
           name: '€'
         }
-      ]
+      ],
+      showAddAlertModal: false
     }
-
   },
   methods: {
     getAlerts() {
@@ -98,13 +110,20 @@ export default {
           this.$router.push({name: 'Login'});
         });
     },
-    getFiatCoinSymbol(fiatCoinId){
+    getFiatCoinSymbol(fiatCoinId) {
       const fiatCoin = this.fiatCoins.find(fiatCoin => fiatCoin.id === fiatCoinId);
       return fiatCoin.name;
-    }
+    },
+    openAlertModal() {
+      this.showAddAlertModal = true;
+    },
+    updateAlertsModal() {
+      this.showAddAlertModal = false;
+    },
   },
   mounted() {
     this.getAlerts()
-  }
+  },
+
 }
 </script>
