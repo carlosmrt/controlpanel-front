@@ -46,14 +46,6 @@ export default {
       user: null,
       items: [
         {
-          icon: 'account_circle',
-          href: '#',
-          title: 'Profile',
-          click: () => {
-            this.$router.push({name: 'Profile'});
-          }
-        },
-        {
           icon: 'poll',
           href: '#',
           title: 'Boards',
@@ -67,6 +59,14 @@ export default {
           title: 'Alerts',
           click: () => {
             this.$router.push({name: 'Alerts'});
+          }
+        },
+        {
+          icon: 'account_circle',
+          href: '#',
+          title: 'Profile',
+          click: () => {
+            this.$router.push({name: 'Profile'});
           }
         },
         {
