@@ -17,10 +17,10 @@
               <v-card-title>{{ alert.coin.name }}</v-card-title>
               <v-list-tile-content>
                 <v-list-tile-sub-title>Min. Price: {{ alert.minPrice }}
-                  {{getFiatCoinSymbol(alert.fiatCoinId) }}
+                  {{ getFiatCoinSymbol(alert.fiatCoinId) }}
                 </v-list-tile-sub-title>
                 <v-list-tile-sub-title>Max. Price: {{ alert.maxPrice }}
-                  {{getFiatCoinSymbol(alert.fiatCoinId) }}
+                  {{ getFiatCoinSymbol(alert.fiatCoinId) }}
                 </v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
@@ -37,7 +37,7 @@
                       ripple="ripple"
                       :disabled="item.disabled"
                       :target="item.target"
-                      @click="item.click">
+                      @click="item.click(alert)">
                       <v-list-tile-content>
                         <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                       </v-list-tile-content>
@@ -55,6 +55,18 @@
       @alertAdded="getAlerts()"
       @addCryptoAlertClosed="updateAlertsModal()"
     />
+    <UpdateCryptoAlertModal
+      :show="showUpdateAlertModal"
+      :alert="selectedAlert"
+      @alertUpdated="getAlerts()"
+      @updateCryptoAlertClosed="updateAlertsModal()"
+    />
+    <DeleteCryptoAlertModal
+      :show="showDeleteAlertModal"
+      :alert="selectedAlert"
+      @alertDeleted="getAlerts()"
+      @deleteCryptoAlertClosed="updateAlertsModal()"
+    />
   </v-layout>
 
 </template>
@@ -62,9 +74,11 @@
 <script>
 import ListAlerts from "../../services/Api/CryptoContext/Alerts/ListAlerts";
 import AddCryptoAlert from "../../components/crypto/AddCryptoAlert";
+import UpdateCryptoAlertModal from "../../components/crypto/UpdateCryptoAlertModal";
+import DeleteCryptoAlertModal from "../../components/crypto/DeleteCryptoAlertModal";
 
 export default {
-  components: {AddCryptoAlert},
+  components: {DeleteCryptoAlertModal, UpdateCryptoAlertModal, AddCryptoAlert},
   data() {
     return {
       alerts: [],
@@ -72,15 +86,15 @@ export default {
         {
           href: '#',
           title: 'Edit',
-          click: () => {
-            this.$router.push({name: 'Profile'});
+          click: (alert) => {
+            this.openUpdateAlertModal(alert)
           }
         },
         {
           href: '#',
           title: 'Delete',
-          click: () => {
-            this.$router.push({name: 'Dashboard'});
+          click: (alert) => {
+            this.openDeleteAlertModal(alert)
           }
         }
       ],
@@ -94,7 +108,10 @@ export default {
           name: '€'
         }
       ],
-      showAddAlertModal: false
+      showAddAlertModal: false,
+      showUpdateAlertModal: false,
+      showDeleteAlertModal: false,
+      selectedAlert: null
     }
   },
   methods: {
@@ -117,8 +134,18 @@ export default {
     openAlertModal() {
       this.showAddAlertModal = true;
     },
+    openUpdateAlertModal(alert) {
+      this.selectedAlert = alert;
+      this.showUpdateAlertModal = true;
+    },
+    openDeleteAlertModal(alert) {
+      this.selectedAlert = alert;
+      this.showDeleteAlertModal = true;
+    },
     updateAlertsModal() {
       this.showAddAlertModal = false;
+      this.showUpdateAlertModal = false;
+      this.showDeleteAlertModal = false;
     },
   },
   mounted() {
