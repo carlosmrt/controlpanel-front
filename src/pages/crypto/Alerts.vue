@@ -3,8 +3,12 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card-title>
         <h3>Alerts</h3>
+        <v-spacer></v-spacer>
+        <v-btn class="roundBorder" dark color="purple" @click="openConnectBot()">
+          Link Account
+        </v-btn>
         <v-btn class="roundBorder" dark color="purple" @click="openAlertModal()">
-          <v-icon dark>mdi-plus</v-icon>
+          Add Alert
         </v-btn>
       </v-card-title>
       <v-card>
@@ -47,6 +51,7 @@
               </v-list-tile-action>
             </v-list-tile>
           </v-layout>
+          <div v-if="!alerts.length" class="text-lg-center">Empty Alerts</div>
         </v-list>
       </v-card>
     </v-flex>
@@ -67,8 +72,11 @@
       @alertDeleted="getAlerts()"
       @deleteCryptoAlertClosed="updateAlertsModal()"
     />
+    <ConnectBot
+      :show="showConnectBot"
+      @connectBotClosed="updateAlertsModal()"
+    />
   </v-layout>
-
 </template>
 
 <script>
@@ -76,9 +84,10 @@ import ListAlerts from "../../services/Api/CryptoContext/Alerts/ListAlerts";
 import AddCryptoAlert from "../../components/crypto/AddCryptoAlert";
 import UpdateCryptoAlertModal from "../../components/crypto/UpdateCryptoAlertModal";
 import DeleteCryptoAlertModal from "../../components/crypto/DeleteCryptoAlertModal";
+import ConnectBot from "../../components/crypto/ConnectBot";
 
 export default {
-  components: {DeleteCryptoAlertModal, UpdateCryptoAlertModal, AddCryptoAlert},
+  components: {ConnectBot, DeleteCryptoAlertModal, UpdateCryptoAlertModal, AddCryptoAlert},
   data() {
     return {
       alerts: [],
@@ -111,6 +120,7 @@ export default {
       showAddAlertModal: false,
       showUpdateAlertModal: false,
       showDeleteAlertModal: false,
+      showConnectBot: false,
       selectedAlert: null
     }
   },
@@ -134,6 +144,9 @@ export default {
     openAlertModal() {
       this.showAddAlertModal = true;
     },
+    openConnectBot() {
+      this.showConnectBot = true;
+    },
     openUpdateAlertModal(alert) {
       this.selectedAlert = alert;
       this.showUpdateAlertModal = true;
@@ -146,6 +159,7 @@ export default {
       this.showAddAlertModal = false;
       this.showUpdateAlertModal = false;
       this.showDeleteAlertModal = false;
+      this.showConnectBot = false;
     },
   },
   mounted() {

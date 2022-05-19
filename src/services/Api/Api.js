@@ -1,8 +1,8 @@
 import axios from "axios";
-import VueNotification from "@kugatsu/vuenotification";
 
 const CORE_CONTEXT_PATH = "/api/core/v1";
 const CRYPTO_CONTEXT_PATH = "/api/crypto/v1";
+const NOTIFICATION_CONTEXT_PATH = "/api/notification/v1";
 const URL = process.env.API_URL
 
 const axiosAPI = axios.create({
@@ -52,5 +52,6 @@ const API = {
 export default {
   METHODS: API,
   CORE_CONTEXT_PATH: CORE_CONTEXT_PATH,
-  CRYPTO_CONTEXT_PATH: CRYPTO_CONTEXT_PATH
+  CRYPTO_CONTEXT_PATH: CRYPTO_CONTEXT_PATH,
+  NOTIFICATION_CONTEXT_PATH: NOTIFICATION_CONTEXT_PATH
 };
