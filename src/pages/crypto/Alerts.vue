@@ -4,8 +4,11 @@
       <v-card-title>
         <h3>Alerts</h3>
         <v-spacer></v-spacer>
-        <v-btn class="roundBorder" dark color="purple" @click="openConnectBot()">
+        <v-btn class="roundBorder" v-if="!chatId" dark color="purple" @click="openLinkBot()">
           Link Account
+        </v-btn>
+        <v-btn class="roundBorder" v-if="chatId" dark color="purple" @click="openUnlinkBot()">
+          Unlink Account
         </v-btn>
         <v-btn class="roundBorder" dark color="purple" @click="openAlertModal()">
           Add Alert
@@ -76,6 +79,10 @@
       :show="showConnectBot"
       @connectBotClosed="updateAlertsModal()"
     />
+    <UnlinkBotModal
+      :show="showUnlinkBot"
+      @unlinkBotClosed="updateAlertsModal()"
+    />
   </v-layout>
 </template>
 
@@ -85,9 +92,11 @@ import AddCryptoAlert from "../../components/crypto/AddCryptoAlert";
 import UpdateCryptoAlertModal from "../../components/crypto/UpdateCryptoAlertModal";
 import DeleteCryptoAlertModal from "../../components/crypto/DeleteCryptoAlertModal";
 import ConnectBot from "../../components/crypto/ConnectBot";
+import InfoBot from "../../services/Api/NotificationContext/CryptoBot/InfoBot";
+import UnlinkBotModal from "../../components/crypto/UnlinkBotModal";
 
 export default {
-  components: {ConnectBot, DeleteCryptoAlertModal, UpdateCryptoAlertModal, AddCryptoAlert},
+  components: {UnlinkBotModal, ConnectBot, DeleteCryptoAlertModal, UpdateCryptoAlertModal, AddCryptoAlert},
   data() {
     return {
       alerts: [],
@@ -121,13 +130,27 @@ export default {
       showUpdateAlertModal: false,
       showDeleteAlertModal: false,
       showConnectBot: false,
-      selectedAlert: null
+      showUnlinkBot: false,
+      selectedAlert: null,
+      chatId: null
     }
   },
   methods: {
     getAlerts() {
       ListAlerts.list().then((response) => {
           this.alerts = response.data;
+        },
+        (error) => {
+          if (error.response.status === 422) {
+            this.$notification.error(error.response.data.error.message, {timer: 3});
+          }
+          sessionStorage.removeItem('token');
+          this.$router.push({name: 'Login'});
+        });
+    },
+    getInfo() {
+      InfoBot.info().then((response) => {
+          this.chatId = response.data.chatId;
         },
         (error) => {
           if (error.response.status === 422) {
@@ -144,8 +167,11 @@ export default {
     openAlertModal() {
       this.showAddAlertModal = true;
     },
-    openConnectBot() {
+    openLinkBot() {
       this.showConnectBot = true;
+    },
+    openUnlinkBot() {
+      this.showUnlinkBot = true;
     },
     openUpdateAlertModal(alert) {
       this.selectedAlert = alert;
@@ -160,10 +186,12 @@ export default {
       this.showUpdateAlertModal = false;
       this.showDeleteAlertModal = false;
       this.showConnectBot = false;
+      this.showUnlinkBot = false;
     },
   },
   mounted() {
     this.getAlerts()
+    this.getInfo()
   },
 
 }
