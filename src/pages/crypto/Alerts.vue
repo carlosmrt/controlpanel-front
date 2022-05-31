@@ -77,11 +77,11 @@
     />
     <ConnectBot
       :show="showConnectBot"
-      @connectBotClosed="updateAlertsModal()"
+      @connectBotClosed="updateBotModal()"
     />
     <UnlinkBotModal
       :show="showUnlinkBot"
-      @unlinkBotClosed="updateAlertsModal()"
+      @unlinkBotClosed="updateBotModal()"
     />
   </v-layout>
 </template>
@@ -185,9 +185,12 @@ export default {
       this.showAddAlertModal = false;
       this.showUpdateAlertModal = false;
       this.showDeleteAlertModal = false;
+    },
+    updateBotModal() {
+      this.getInfo();
       this.showConnectBot = false;
       this.showUnlinkBot = false;
-    },
+    }
   },
   mounted() {
     this.getAlerts()
